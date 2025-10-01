@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - Construction 360</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-blue: #0056B3;
+            --primary-grey: #333333;
+            --light-grey: #F5F5F5;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--primary-grey);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-yellow);
+            color: var(--primary-yellow);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-yellow);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo-text span {
+            color: var(--primary-yellow);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-grey);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-yellow);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .language-selector {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .language-selector select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--white);
+            cursor: pointer;
+            appearance: none;
+            padding-right: 30px;
+        }
+
+        .language-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+            margin-left: 20px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            display: none;
+            z-index: 999;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav ul li {
+            margin: 15px 0;
+        }
+        
+        .mobile-nav ul li a {
+            color: var(--primary-grey);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumb li {
+            margin: 0 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: '>';
+            margin-left: 10px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-yellow);
+            text-decoration: none;
+        }
+
+        /* About Intro Section */
+        .about-intro {
+            padding: 100px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Mission Vision Section */
+        .mission-vision {
+            background-color: var(--light-grey);
+            padding: 100px 0;
+        }
+
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .mission-card, .vision-card {
+            background-color: var(--white);
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .mission-card i, .vision-card i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+        }
+
+        .mission-card h3, .vision-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Team Section */
+        .team {
+            background-color: var(--light-grey);
+            padding: 100px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-member {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-info {
+            padding: 25px 20px;
+        }
+
+        .member-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: var(--primary-yellow);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-us {
+            padding: 100px 0;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .reason-card {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reason-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .reason-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        /* Stats Section */
+        .stats {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-yellow);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-grey);
+            color: var(--white);
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .about-text h2 {
+                font-size: 2rem;
+            }
+            
+            .mission-card, .vision-card {
+                padding: 40px 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .logo-image {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .reason-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-image">
+                   <img src="./IMG-20250926-WA0032(1).jpg" alt="Construction 360 Logo">
+                </div>
+                <div class="logo-text">CONSTRUCTO<span>360</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                    <li><a href="about.html" class="active" data-key="nav.about">À Propos</a></li>
+                    <li><a href="services.html" data-key="nav.services">Services</a></li>
+                    <li><a href="projects.html" data-key="nav.projects">Projets</a></li>
+                    <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                    <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="language-selector">
+                    <select id="language">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                <li><a href="about.html" class="active" data-key="nav.about">À Propos</a></li>
+                <li><a href="services.html" data-key="nav.services">Services</a></li>
+                <li><a href="projects.html" data-key="nav.projects">Projets</a></li>
+                <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container page-header-content">
+            <h1 data-key="about.title">À Propos de Nous</h1>
+           
+        </div>
+    </section>
+
+    <!-- About Intro Section -->
+    <section class="about-intro">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-key="about.history.title">Notre Histoire</h2>
+                    <p data-key="about.history.p1">Fondée en 2008, Construction 360 est née de la vision de trois ingénieurs passionnés par l'innovation dans le secteur de la construction. Notre objectif était simple mais ambitieux : révolutionner l'industrie en offrant des services complets de conception, design et exécution sous un même toit.</p>
+                    <p data-key="about.history.p2">Au fil des années, nous avons grandi pour devenir un acteur majeur dans le secteur de la construction, réalisant plus de 250 projets résidentiels, commerciaux et industriels à travers la France. Notre engagement envers l'excellence et l'innovation nous a valu de nombreux prix et reconnaissances dans l'industrie.</p>
+                    <p data-key="about.history.p3">Aujourd'hui, Construction 360 continue d'évoluer, adoptant les dernières technologies de construction durable et les méthodes de travail les plus efficaces pour offrir à nos clients des résultats exceptionnels.</p>
+                    <a href="contact.html" class="btn" data-key="about.contactBtn">Nous Contacter</a>
+                </div>
+                <div class="about-image">
+                    <img src="./con.jpeg" alt="Équipe Construction 360">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mission-vision-grid">
+                <div class="mission-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3 data-key="about.mission.title">Notre Mission</h3>
+                    <p data-key="about.mission.description">Transformer les visions de nos clients en réalités tangibles grâce à une approche intégrée de conception, design et exécution. Nous nous engageons à fournir des solutions de construction innovantes, durables et de haute qualité qui dépassent les attentes tout en respectant les délais et budgets.</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-eye"></i>
+                    <h3 data-key="about.vision.title">Notre Vision</h3>
+                    <p data-key="about.vision.description">Devenir le leader reconnu dans l'industrie de la construction en France, en établissant de nouvelles normes d'excellence, d'innovation et de durabilité. Nous aspirons à façonner l'avenir de l'environnement bâti en créant des espaces qui améliorent la qualité de vie et respectent notre planète.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="about.values.title">Nos Valeurs</h2>
+                <p data-key="about.values.subtitle">Les principes qui guident chacune de nos actions et décisions</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3 data-key="about.values.integrity">Intégrité</h3>
+                    <p data-key="about.values.integrityDesc">Nous maintenons les plus hauts standards d'éthique et de transparence dans toutes nos relations d'affaires.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-star"></i>
+                    <h3 data-key="about.values.excellence">Excellence</h3>
+                    <p data-key="about.values.excellenceDesc">Nous visons l'excellence dans chaque projet, en nous efforçant de dépasser les attentes de nos clients.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3 data-key="about.values.innovation">Innovation</h3>
+                    <p data-key="about.values.innovationDesc">Nous adoptons les dernières technologies et méthodes pour offrir des solutions de construction avancées.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3 data-key="about.values.sustainability">Durabilité</h3>
+                    <p data-key="about.values.sustainabilityDesc">Nous nous engageons à construire de manière responsable, en minimisant notre impact environnemental.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="about.team.title">Notre Équipe de Direction</h2>
+                <p data-key="about.team.subtitle">Rencontrez les esprits visionnaires qui dirigent Construction 360 vers l'excellence</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Jean Dupont">
+                    </div>
+                    <div class="member-info">
+                        <h3>Jean Dupont</h3>
+                        <div class="member-role" data-key="about.team.ceo">PDG & Fondateur</div>
+                        <p data-key="about.team.ceoDesc">20+ ans d'expérience en gestion de projets de construction</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Marie Lambert">
+                    </div>
+                    <div class="member-info">
+                        <h3>Marie Lambert</h3>
+                        <div class="member-role" data-key="about.team.operations">Directrice des Opérations</div>
+                        <p data-key="about.team.operationsDesc">Spécialiste en gestion de chantier et optimisation des processus</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sophie Martin">
+                    </div>
+                    <div class="member-info">
+                        <h3>Sophie Martin</h3>
+                        <div class="member-role" data-key="about.team.design">Directrice du Design</div>
+                        <p data-key="about.team.designDesc">Architecte primée avec une passion pour les designs durables</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="about.whyChoose.title">Pourquoi Choisir Construction 360?</h2>
+                <p data-key="about.whyChoose.subtitle">Découvrez ce qui nous différencie de la concurrence</p>
+            </div>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3 data-key="about.whyChoose.integrated">Approche Intégrée</h3>
+                        <p data-key="about.whyChoose.integratedDesc">Nous offrons une solution complète de la conception à l'exécution, garantissant une cohérence et une efficacité maximales tout au long du projet.</p>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3 data-key="about.whyChoose.expertise">Expertise Éprouvée</h3>
+                        <p data-key="about.whyChoose.expertiseDesc">Avec plus de 15 ans d'expérience et 250+ projets réalisés, notre expertise est reconnue dans l'industrie.</p>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3 data-key="about.whyChoose.team">Équipe Qualifiée</h3>
+                        <p data-key="about.whyChoose.teamDesc">Notre équipe de 50+ professionnels comprend des ingénieurs, architectes et artisans hautement qualifiés.</p>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3 data-key="about.whyChoose.sustainable">Engagement Durable</h3>
+                        <p data-key="about.whyChoose.sustainableDesc">Nous priorisons les pratiques de construction durables et les matériaux écologiques dans tous nos projets.</p>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3 data-key="about.whyChoose.deadlines">Respect des Délais</h3>
+                        <p data-key="about.whyChoose.deadlinesDesc">Notre méthodologie rigoureuse nous permet de respecter systématiquement les délais convenus.</p>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <div class="reason-content">
+                        <h3 data-key="about.whyChoose.transparency">Transparence des Coûts</h3>
+                        <p data-key="about.whyChoose.transparencyDesc">Pas de surprises avec nos devis détaillés et notre communication transparente sur tous les aspects financiers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-text" data-key="about.stats.experience">Années d'Expérience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-text" data-key="about.stats.projects">Projets Réalisés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text" data-key="about.stats.employees">Employés Experts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-text" data-key="about.stats.awards">Prix d'Excellence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-key="footer.company">Construction 360</h3>
+                    <p data-key="footer.description">Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.quickLinks">Liens Rapides</h3>
+                    <ul>
+                        <li><a href="./index.html" data-key="nav.home">Accueil</a></li>
+                        <li><a href="./about.html" data-key="nav.about">À Propos</a></li>
+                        <li><a href="services.html" data-key="nav.services">Services</a></li>
+                        <li><a href="projects.html" data-key="nav.projects">Projets</a></li>
+                        <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.services">Services</h3>
+                    <ul>
+                        <li><a href="services.html" data-key="services.conception.title">Conception</a></li>
+                        <li><a href="services.html" data-key="services.design.title">Design</a></li>
+                        <li><a href="services.html" data-key="services.execution.title">Exécution</a></li>
+                        <li><a href="services.html" data-key="footer.consultation">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.contact">Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-key="footer.copyright">&copy; 2023 Construction 360. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language data
+        const translations = {
+            fr: {
+                // Navigation
+                "nav.home": "Accueil",
+                "nav.about": "À Propos",
+                "nav.services": "Services",
+                "nav.projects": "Projets",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Breadcrumb
+                "breadcrumb.home": "Accueil",
+                "breadcrumb.about": "À Propos",
+                
+                // About Page
+                "about.title": "À Propos de Nous",
+                "about.history.title": "Notre Histoire",
+                "about.history.p1": "Fondée en 2008, Construction 360 est née de la vision de trois ingénieurs passionnés par l'innovation dans le secteur de la construction. Notre objectif était simple mais ambitieux : révolutionner l'industrie en offrant des services complets de conception, design et exécution sous un même toit.",
+                "about.history.p2": "Au fil des années, nous avons grandi pour devenir un acteur majeur dans le secteur de la construction, réalisant plus de 250 projets résidentiels, commerciaux et industriels à travers la France. Notre engagement envers l'excellence et l'innovation nous a valu de nombreux prix et reconnaissances dans l'industrie.",
+                "about.history.p3": "Aujourd'hui, Construction 360 continue d'évoluer, adoptant les dernières technologies de construction durable et les méthodes de travail les plus efficaces pour offrir à nos clients des résultats exceptionnels.",
+                "about.contactBtn": "Nous Contacter",
+                
+                // Mission & Vision
+                "about.mission.title": "Notre Mission",
+                "about.mission.description": "Transformer les visions de nos clients en réalités tangibles grâce à une approche intégrée de conception, design et exécution. Nous nous engageons à fournir des solutions de construction innovantes, durables et de haute qualité qui dépassent les attentes tout en respectant les délais et budgets.",
+                "about.vision.title": "Notre Vision",
+                "about.vision.description": "Devenir le leader reconnu dans l'industrie de la construction en France, en établissant de nouvelles normes d'excellence, d'innovation et de durabilité. Nous aspirons à façonner l'avenir de l'environnement bâti en créant des espaces qui améliorent la qualité de vie et respectent notre planète.",
+                
+                // Values
+                "about.values.title": "Nos Valeurs",
+                "about.values.subtitle": "Les principes qui guident chacune de nos actions et décisions",
+                "about.values.integrity": "Intégrité",
+                "about.values.integrityDesc": "Nous maintenons les plus hauts standards d'éthique et de transparence dans toutes nos relations d'affaires.",
+                "about.values.excellence": "Excellence",
+                "about.values.excellenceDesc": "Nous visons l'excellence dans chaque projet, en nous efforçant de dépasser les attentes de nos clients.",
+                "about.values.innovation": "Innovation",
+                "about.values.innovationDesc": "Nous adoptons les dernières technologies et méthodes pour offrir des solutions de construction avancées.",
+                "about.values.sustainability": "Durabilité",
+                "about.values.sustainabilityDesc": "Nous nous engageons à construire de manière responsable, en minimisant notre impact environnemental.",
+                
+                // Team
+                "about.team.title": "Notre Équipe de Direction",
+                "about.team.subtitle": "Rencontrez les esprits visionnaires qui dirigent Construction 360 vers l'excellence",
+                "about.team.ceo": "PDG & Fondateur",
+                "about.team.ceoDesc": "20+ ans d'expérience en gestion de projets de construction",
+                "about.team.operations": "Directrice des Opérations",
+                "about.team.operationsDesc": "Spécialiste en gestion de chantier et optimisation des processus",
+                "about.team.design": "Directrice du Design",
+                "about.team.designDesc": "Architecte primée avec une passion pour les designs durables",
+                
+                // Why Choose Us
+                "about.whyChoose.title": "Pourquoi Choisir Construction 360?",
+                "about.whyChoose.subtitle": "Découvrez ce qui nous différencie de la concurrence",
+                "about.whyChoose.integrated": "Approche Intégrée",
+                "about.whyChoose.integratedDesc": "Nous offrons une solution complète de la conception à l'exécution, garantissant une cohérence et une efficacité maximales tout au long du projet.",
+                "about.whyChoose.expertise": "Expertise Éprouvée",
+                "about.whyChoose.expertiseDesc": "Avec plus de 15 ans d'expérience et 250+ projets réalisés, notre expertise est reconnue dans l'industrie.",
+                "about.whyChoose.team": "Équipe Qualifiée",
+                "about.whyChoose.teamDesc": "Notre équipe de 50+ professionnels comprend des ingénieurs, architectes et artisans hautement qualifiés.",
+                "about.whyChoose.sustainable": "Engagement Durable",
+                "about.whyChoose.sustainableDesc": "Nous priorisons les pratiques de construction durables et les matériaux écologiques dans tous nos projets.",
+                "about.whyChoose.deadlines": "Respect des Délais",
+                "about.whyChoose.deadlinesDesc": "Notre méthodologie rigoureuse nous permet de respecter systématiquement les délais convenus.",
+                "about.whyChoose.transparency": "Transparence des Coûts",
+                "about.whyChoose.transparencyDesc": "Pas de surprises avec nos devis détaillés et notre communication transparente sur tous les aspects financiers.",
+                
+                // Stats
+                "about.stats.experience": "Années d'Expérience",
+                "about.stats.projects": "Projets Réalisés",
+                "about.stats.employees": "Employés Experts",
+                "about.stats.awards": "Prix d'Excellence",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.",
+                "footer.quickLinks": "Liens Rapides",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Avenue de la Construction, Paris",
+                "footer.copyright": "© 2023 Construction 360. Tous droits réservés."
+            },
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.projects": "Projects",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Breadcrumb
+                "breadcrumb.home": "Home",
+                "breadcrumb.about": "About",
+                
+                // About Page
+                "about.title": "About Us",
+                "about.history.title": "Our History",
+                "about.history.p1": "Founded in 2008, Construction 360 was born from the vision of three engineers passionate about innovation in the construction sector. Our goal was simple but ambitious: to revolutionize the industry by offering comprehensive design, planning and execution services under one roof.",
+                "about.history.p2": "Over the years, we have grown to become a major player in the construction sector, completing more than 250 residential, commercial and industrial projects across France. Our commitment to excellence and innovation has earned us numerous awards and recognition in the industry.",
+                "about.history.p3": "Today, Construction 360 continues to evolve, adopting the latest sustainable construction technologies and most efficient working methods to deliver exceptional results to our clients.",
+                "about.contactBtn": "Contact Us",
+                
+                // Mission & Vision
+                "about.mission.title": "Our Mission",
+                "about.mission.description": "Transform our clients' visions into tangible realities through an integrated approach to design, planning and execution. We are committed to providing innovative, sustainable and high-quality construction solutions that exceed expectations while respecting deadlines and budgets.",
+                "about.vision.title": "Our Vision",
+                "about.vision.description": "To become the recognized leader in the construction industry in France, establishing new standards of excellence, innovation and sustainability. We aspire to shape the future of the built environment by creating spaces that enhance quality of life and respect our planet.",
+                
+                // Values
+                "about.values.title": "Our Values",
+                "about.values.subtitle": "The principles that guide each of our actions and decisions",
+                "about.values.integrity": "Integrity",
+                "about.values.integrityDesc": "We maintain the highest standards of ethics and transparency in all our business relationships.",
+                "about.values.excellence": "Excellence",
+                "about.values.excellenceDesc": "We strive for excellence in every project, striving to exceed our clients' expectations.",
+                "about.values.innovation": "Innovation",
+                "about.values.innovationDesc": "We adopt the latest technologies and methods to deliver advanced construction solutions.",
+                "about.values.sustainability": "Sustainability",
+                "about.values.sustainabilityDesc": "We are committed to building responsibly, minimizing our environmental impact.",
+                
+                // Team
+                "about.team.title": "Our Leadership Team",
+                "about.team.subtitle": "Meet the visionary minds leading Construction 360 to excellence",
+                "about.team.ceo": "CEO & Founder",
+                "about.team.ceoDesc": "20+ years of experience in construction project management",
+                "about.team.operations": "Operations Director",
+                "about.team.operationsDesc": "Specialist in site management and process optimization",
+                "about.team.design": "Design Director",
+                "about.team.designDesc": "Award-winning architect with a passion for sustainable designs",
+                
+                // Why Choose Us
+                "about.whyChoose.title": "Why Choose Construction 360?",
+                "about.whyChoose.subtitle": "Discover what sets us apart from the competition",
+                "about.whyChoose.integrated": "Integrated Approach",
+                "about.whyChoose.integratedDesc": "We offer a complete solution from design to execution, ensuring maximum consistency and efficiency throughout the project.",
+                "about.whyChoose.expertise": "Proven Expertise",
+                "about.whyChoose.expertiseDesc": "With over 15 years of experience and 250+ completed projects, our expertise is recognized in the industry.",
+                "about.whyChoose.team": "Qualified Team",
+                "about.whyChoose.teamDesc": "Our team of 50+ professionals includes highly qualified engineers, architects and craftsmen.",
+                "about.whyChoose.sustainable": "Sustainable Commitment",
+                "about.whyChoose.sustainableDesc": "We prioritize sustainable construction practices and eco-friendly materials in all our projects.",
+                "about.whyChoose.deadlines": "Respect for Deadlines",
+                "about.whyChoose.deadlinesDesc": "Our rigorous methodology allows us to systematically meet agreed deadlines.",
+                "about.whyChoose.transparency": "Cost Transparency",
+                "about.whyChoose.transparencyDesc": "No surprises with our detailed quotes and transparent communication on all financial aspects.",
+                
+                // Stats
+                "about.stats.experience": "Years of Experience",
+                "about.stats.projects": "Projects Completed",
+                "about.stats.employees": "Expert Employees",
+                "about.stats.awards": "Excellence Awards",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Your trusted partner for all your construction projects, from conception to execution.",
+                "footer.quickLinks": "Quick Links",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Construction Avenue, Paris",
+                "footer.copyright": "© 2023 Construction 360. All rights reserved."
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'fr';
+
+        // Function to update all text content
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update language selector
+            document.getElementById('language').value = lang;
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Language Selector
+        const languageSelector = document.getElementById('language');
+        languageSelector.addEventListener('change', function() {
+            updateLanguage(this.value);
+        });
+
+        // Initialize with French language
+        updateLanguage('fr');
+    </script>
+</body>
+</html>

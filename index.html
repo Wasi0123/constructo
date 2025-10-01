@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction 360 - Conception, Design et Exécution</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-blue: #0056B3;
+            --primary-grey: #333333;
+            --light-grey: #F5F5F5;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--primary-grey);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-yellow);
+            color: var(--primary-yellow);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-yellow);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo-text span {
+            color: var(--primary-yellow);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-grey);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-yellow);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .language-selector {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .language-selector select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--white);
+            cursor: pointer;
+            appearance: none;
+            padding-right: 30px;
+        }
+
+        .language-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+            margin-left: 20px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            display: none;
+            z-index: 999;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav ul li {
+            margin: 15px 0;
+        }
+        
+        .mobile-nav ul li a {
+            color: var(--primary-grey);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--light-grey);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .service-content {
+            padding: 30px 25px;
+        }
+
+        .service-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Projects Section */
+        .projects-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--white);
+            padding: 30px;
+        }
+
+        .slide-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary-blue);
+        }
+
+        /* Quick Links Section */
+        .quick-links {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .quick-links .section-title h2 {
+            color: var(--white);
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .quick-link-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px 20px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .quick-link-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-yellow);
+        }
+
+        .quick-link-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background-color: var(--light-grey);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-grey);
+            color: var(--white);
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .service-content {
+                padding: 20px 15px;
+            }
+            
+            .slide-content {
+                padding: 20px;
+            }
+            
+            .slide-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .hero {
+                height: 80vh;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .logo-image {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-image">
+                   <img src="./IMG-20250926-WA0032(1).jpg" alt="Construction 360 Logo">
+                </div>
+                <div class="logo-text">CONSTRUCTO<span>360</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-key="nav.home">Accueil</a></li>
+                    <li><a href="./about.html" data-key="nav.about">À Propos</a></li>
+                    <li><a href="#services" data-key="nav.services">Services</a></li>
+                    <li><a href="#projects" data-key="nav.projects">Projets</a></li>
+                    <li><a href="#blog" data-key="nav.blog">Blog</a></li>
+                    <li><a href="#contact" data-key="nav.contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="language-selector">
+                    <select id="language">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#" class="active" data-key="nav.home">Accueil</a></li>
+                <li><a href="#about" data-key="nav.about">À Propos</a></li>
+                <li><a href="#services" data-key="nav.services">Services</a></li>
+                <li><a href="#projects" data-key="nav.projects">Projets</a></li>
+                <li><a href="#blog" data-key="nav.blog">Blog</a></li>
+                <li><a href="#contact" data-key="nav.contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 data-key="hero.title">Construction 360 - Excellence en Bâtiment</h1>
+            <p data-key="hero.subtitle">Votre partenaire de confiance pour la conception, le design et l'exécution de projets de construction innovants et durables.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn" data-key="hero.servicesBtn">Découvrir nos Services</a>
+                <a href="#contact" class="btn btn-secondary" data-key="hero.quoteBtn">Demander un Devis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="services.title">Nos Services</h2>
+                <p data-key="services.subtitle">Construction 360 offre une gamme complète de services pour transformer vos idées en réalité, de la conception à la réalisation.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-key="services.conception.title">Conception</h3>
+                        <p data-key="services.conception.description">Planification et architecture innovantes pour créer des espaces fonctionnels et esthétiques qui répondent à vos besoins spécifiques.</p>
+                        <a href="#" class="btn" data-key="services.learnMore">En savoir plus</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-key="services.design.title">Design</h3>
+                        <p data-key="services.design.description">Ingénierie détaillée et design intérieur/extérieur pour optimiser l'espace, la fonctionnalité et l'esthétique de votre projet.</p>
+                        <a href="#" class="btn" data-key="services.learnMore">En savoir plus</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-key="services.execution.title">Exécution</h3>
+                        <p data-key="services.execution.description">Construction et livraison de projets avec une gestion rigoureuse pour garantir qualité, délais et respect du budget.</p>
+                        <a href="#" class="btn" data-key="services.learnMore">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="projects.title">Nos Projets Récents</h2>
+                <p data-key="projects.subtitle">Découvrez quelques-unes de nos réalisations qui témoignent de notre expertise et de notre engagement envers l'excellence.</p>
+            </div>
+            <div class="projects-slider">
+                <div class="slider-container" id="sliderContainer">
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Projet Résidentiel">
+                        <div class="slide-content">
+                            <h3 data-key="projects.project1.title">Résidence Moderne</h3>
+                            <p data-key="projects.project1.description">Construction d'une résidence contemporaine avec des matériaux durables et des finitions de haute qualité.</p>
+                            <a href="#" class="btn" data-key="projects.viewProject">Voir le projet</a>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Projet Commercial">
+                        <div class="slide-content">
+                            <h3 data-key="projects.project2.title">Centre Commercial</h3>
+                            <p data-key="projects.project2.description">Conception et construction d'un centre commercial innovant avec des espaces commerciaux et de détente.</p>
+                            <a href="#" class="btn" data-key="projects.viewProject">Voir le projet</a>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Projet Industriel">
+                        <div class="slide-content">
+                            <h3 data-key="projects.project3.title">Complexe Industriel</h3>
+                            <p data-key="projects.project3.description">Réalisation d'un complexe industriel avec des installations modernes et respectueuses de l'environnement.</p>
+                            <a href="#" class="btn" data-key="projects.viewProject">Voir le projet</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-nav" id="sliderNav">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="stats.title">Construction 360 en Chiffres</h2>
+                <p data-key="stats.subtitle">Des années d'expérience et des centaines de projets réalisés avec succès.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="stat-number">15+</div>
+                    <div class="stat-text" data-key="stats.experience">Années d'Expérience</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-building"></i>
+                    <div class="stat-number">250+</div>
+                    <div class="stat-text" data-key="stats.projects">Projets Réalisés</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text" data-key="stats.employees">Employés Experts</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-award"></i>
+                    <div class="stat-number">12</div>
+                    <div class="stat-text" data-key="stats.awards">Prix d'Excellence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="quicklinks.title">Accès Rapide</h2>
+                <p data-key="quicklinks.subtitle">Naviguez facilement vers les sections principales de notre site web.</p>
+            </div>
+            <div class="quick-links-grid">
+                <div class="quick-link-card">
+                    <i class="fas fa-concierge-bell"></i>
+                    <h3 data-key="quicklinks.services.title">Nos Services</h3>
+                    <p data-key="quicklinks.services.description">Découvrez notre gamme complète de services de construction.</p>
+                    <a href="#services" class="btn" data-key="quicklinks.learnMore">En savoir plus</a>
+                </div>
+                <div class="quick-link-card">
+                    <i class="fas fa-images"></i>
+                    <h3 data-key="quicklinks.gallery.title">Galerie</h3>
+                    <p data-key="quicklinks.gallery.description">Explorez nos projets réalisés et en cours de construction.</p>
+                    <a href="#gallery" class="btn" data-key="quicklinks.viewGallery">Voir la galerie</a>
+                </div>
+                <div class="quick-link-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3 data-key="quicklinks.contact.title">Contact</h3>
+                    <p data-key="quicklinks.contact.description">Prenez contact avec nous pour discuter de votre projet.</p>
+                    <a href="#contact" class="btn" data-key="quicklinks.contactUs">Nous contacter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-key="footer.company">Construction 360</h3>
+                    <p data-key="footer.description">Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.quickLinks">Liens Rapides</h3>
+                    <ul>
+                        <li><a href="#" data-key="nav.home">Accueil</a></li>
+                        <li><a href="#about" data-key="nav.about">À Propos</a></li>
+                        <li><a href="#services" data-key="nav.services">Services</a></li>
+                        <li><a href="#projects" data-key="nav.projects">Projets</a></li>
+                        <li><a href="#blog" data-key="nav.blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.services">Services</h3>
+                    <ul>
+                        <li><a href="#services" data-key="services.conception.title">Conception</a></li>
+                        <li><a href="#services" data-key="services.design.title">Design</a></li>
+                        <li><a href="#services" data-key="services.execution.title">Exécution</a></li>
+                        <li><a href="#services" data-key="footer.consultation">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.contact">Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-key="footer.copyright">&copy; 2023 Construction 360. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language data
+        const translations = {
+            fr: {
+                // Navigation
+                "nav.home": "Accueil",
+                "nav.about": "À Propos",
+                "nav.services": "Services",
+                "nav.projects": "Projets",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Hero Section
+                "hero.title": "Construction 360 - Excellence en Bâtiment",
+                "hero.subtitle": "Votre partenaire de confiance pour la conception, le design et l'exécution de projets de construction innovants et durables.",
+                "hero.servicesBtn": "Découvrir nos Services",
+                "hero.quoteBtn": "Demander un Devis",
+                
+                // Services Section
+                "services.title": "Nos Services",
+                "services.subtitle": "Construction 360 offre une gamme complète de services pour transformer vos idées en réalité, de la conception à la réalisation.",
+                "services.conception.title": "Conception",
+                "services.conception.description": "Planification et architecture innovantes pour créer des espaces fonctionnels et esthétiques qui répondent à vos besoins spécifiques.",
+                "services.design.title": "Design",
+                "services.design.description": "Ingénierie détaillée et design intérieur/extérieur pour optimiser l'espace, la fonctionnalité et l'esthétique de votre projet.",
+                "services.execution.title": "Exécution",
+                "services.execution.description": "Construction et livraison de projets avec une gestion rigoureuse pour garantir qualité, délais et respect du budget.",
+                "services.learnMore": "En savoir plus",
+                
+                // Projects Section
+                "projects.title": "Nos Projets Récents",
+                "projects.subtitle": "Découvrez quelques-unes de nos réalisations qui témoignent de notre expertise et de notre engagement envers l'excellence.",
+                "projects.project1.title": "Résidence Moderne",
+                "projects.project1.description": "Construction d'une résidence contemporaine avec des matériaux durables et des finitions de haute qualité.",
+                "projects.project2.title": "Centre Commercial",
+                "projects.project2.description": "Conception et construction d'un centre commercial innovant avec des espaces commerciaux et de détente.",
+                "projects.project3.title": "Complexe Industriel",
+                "projects.project3.description": "Réalisation d'un complexe industriel avec des installations modernes et respectueuses de l'environnement.",
+                "projects.viewProject": "Voir le projet",
+                
+                // Stats Section
+                "stats.title": "Construction 360 en Chiffres",
+                "stats.subtitle": "Des années d'expérience et des centaines de projets réalisés avec succès.",
+                "stats.experience": "Années d'Expérience",
+                "stats.projects": "Projets Réalisés",
+                "stats.employees": "Employés Experts",
+                "stats.awards": "Prix d'Excellence",
+                
+                // Quick Links Section
+                "quicklinks.title": "Accès Rapide",
+                "quicklinks.subtitle": "Naviguez facilement vers les sections principales de notre site web.",
+                "quicklinks.services.title": "Nos Services",
+                "quicklinks.services.description": "Découvrez notre gamme complète de services de construction.",
+                "quicklinks.gallery.title": "Galerie",
+                "quicklinks.gallery.description": "Explorez nos projets réalisés et en cours de construction.",
+                "quicklinks.contact.title": "Contact",
+                "quicklinks.contact.description": "Prenez contact avec nous pour discuter de votre projet.",
+                "quicklinks.learnMore": "En savoir plus",
+                "quicklinks.viewGallery": "Voir la galerie",
+                "quicklinks.contactUs": "Nous contacter",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.",
+                "footer.quickLinks": "Liens Rapides",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Avenue de la Construction, Paris",
+                "footer.copyright": "© 2023 Construction 360. Tous droits réservés."
+            },
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.projects": "Projects",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Hero Section
+                "hero.title": "Construction 360 - Building Excellence",
+                "hero.subtitle": "Your trusted partner for the design, planning and execution of innovative and sustainable construction projects.",
+                "hero.servicesBtn": "Discover our Services",
+                "hero.quoteBtn": "Request a Quote",
+                
+                // Services Section
+                "services.title": "Our Services",
+                "services.subtitle": "Construction 360 offers a complete range of services to turn your ideas into reality, from conception to completion.",
+                "services.conception.title": "Conception",
+                "services.conception.description": "Innovative planning and architecture to create functional and aesthetic spaces that meet your specific needs.",
+                "services.design.title": "Design",
+                "services.design.description": "Detailed engineering and interior/exterior design to optimize space, functionality and aesthetics of your project.",
+                "services.execution.title": "Execution",
+                "services.execution.description": "Construction and project delivery with rigorous management to ensure quality, deadlines and budget compliance.",
+                "services.learnMore": "Learn More",
+                
+                // Projects Section
+                "projects.title": "Our Recent Projects",
+                "projects.subtitle": "Discover some of our achievements that demonstrate our expertise and commitment to excellence.",
+                "projects.project1.title": "Modern Residence",
+                "projects.project1.description": "Construction of a contemporary residence with sustainable materials and high-quality finishes.",
+                "projects.project2.title": "Shopping Center",
+                "projects.project2.description": "Design and construction of an innovative shopping center with commercial and leisure spaces.",
+                "projects.project3.title": "Industrial Complex",
+                "projects.project3.description": "Realization of an industrial complex with modern and environmentally friendly facilities.",
+                "projects.viewProject": "View Project",
+                
+                // Stats Section
+                "stats.title": "Construction 360 in Numbers",
+                "stats.subtitle": "Years of experience and hundreds of successfully completed projects.",
+                "stats.experience": "Years of Experience",
+                "stats.projects": "Projects Completed",
+                "stats.employees": "Expert Employees",
+                "stats.awards": "Excellence Awards",
+                
+                // Quick Links Section
+                "quicklinks.title": "Quick Access",
+                "quicklinks.subtitle": "Easily navigate to the main sections of our website.",
+                "quicklinks.services.title": "Our Services",
+                "quicklinks.services.description": "Discover our complete range of construction services.",
+                "quicklinks.gallery.title": "Gallery",
+                "quicklinks.gallery.description": "Explore our completed and ongoing construction projects.",
+                "quicklinks.contact.title": "Contact",
+                "quicklinks.contact.description": "Get in touch with us to discuss your project.",
+                "quicklinks.learnMore": "Learn More",
+                "quicklinks.viewGallery": "View Gallery",
+                "quicklinks.contactUs": "Contact Us",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Your trusted partner for all your construction projects, from conception to execution.",
+                "footer.quickLinks": "Quick Links",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Construction Avenue, Paris",
+                "footer.copyright": "© 2023 Construction 360. All rights reserved."
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'fr';
+
+        // Function to update all text content
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update language selector
+            document.getElementById('language').value = lang;
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+        
+        // Image Slider
+        const sliderContainer = document.getElementById('sliderContainer');
+        const sliderDots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            if (index < 0) {
+                currentSlide = sliderDots.length - 1;
+            } else if (index >= sliderDots.length) {
+                currentSlide = 0;
+            } else {
+                currentSlide = index;
+            }
+            
+            sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active dot
+            sliderDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        // Add click events to dots
+        sliderDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                showSlide(i);
+            });
+        });
+        
+        // Auto slide
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Language Selector
+        const languageSelector = document.getElementById('language');
+        languageSelector.addEventListener('change', function() {
+            updateLanguage(this.value);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Initialize with French language
+        updateLanguage('fr');
+    </script>
+</body>
+</html>
