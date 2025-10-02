@@ -1,9 +1,1591 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>foobar</title>
-	</head>
-	<body>
-		<div>foobar</div>
-	</body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets - Construction 360</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-blue: #0056B3;
+            --primary-grey: #333333;
+            --light-grey: #F5F5F5;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--primary-grey);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-yellow);
+            color: var(--primary-yellow);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-yellow);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo-text span {
+            color: var(--primary-yellow);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-grey);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-yellow);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .language-selector {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .language-selector select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--white);
+            cursor: pointer;
+            appearance: none;
+            padding-right: 30px;
+        }
+
+        .language-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+            margin-left: 20px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            display: none;
+            z-index: 999;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav ul li {
+            margin: 15px 0;
+        }
+        
+        .mobile-nav ul li a {
+            color: var(--primary-grey);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        /* Gallery Hero Section */
+        .gallery-hero {
+            position: relative;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .gallery-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .gallery-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 0;
+            background-color: var(--light-grey);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background-color: var(--white);
+            color: var(--primary-grey);
+            border: 2px solid var(--primary-blue);
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 86, 179, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-overlay a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .project-overlay a:hover {
+            color: var(--primary-yellow);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-category {
+            display: inline-block;
+            background-color: var(--light-grey);
+            color: var(--primary-blue);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .project-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .project-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .project-details {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        /* Project Detail Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 50px auto;
+            width: 90%;
+            max-width: 1000px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-gallery {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-dot.active {
+            background-color: var(--primary-yellow);
+        }
+
+        .gallery-prev, .gallery-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .gallery-prev:hover, .gallery-next:hover {
+            background-color: var(--primary-blue);
+        }
+
+        .gallery-prev {
+            left: 20px;
+        }
+
+        .gallery-next {
+            right: 20px;
+        }
+
+        .project-detail-content {
+            padding: 40px;
+        }
+
+        .project-detail-header {
+            margin-bottom: 30px;
+        }
+
+        .project-detail-category {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .project-detail-header h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .project-detail-meta {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .project-detail-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .project-detail-body {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .project-description h3, .project-specs h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .project-description p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .specs-list {
+            list-style: none;
+        }
+
+        .specs-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--primary-grey);
+        }
+
+        .spec-value {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-grey);
+            color: var(--white);
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .project-detail-body {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .gallery-hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .gallery-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .project-detail-content {
+                padding: 25px;
+            }
+            
+            .project-detail-header h2 {
+                font-size: 1.7rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .gallery-hero {
+                height: 40vh;
+            }
+            
+            .gallery-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .logo-image {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .project-detail-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-image">
+                   <img src="./IMG-20250926-WA0032(1).jpg" alt="Construction 360 Logo">
+                </div>
+                <div class="logo-text">CONSTRUCTO<span>360</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                    <li><a href="about.html" data-key="nav.about">À Propos</a></li>
+                    <li><a href="service.html" data-key="nav.services">Services</a></li>
+                    <li><a href="gallery.html" class="active" data-key="nav.projects">Projets</a></li>
+                    <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                    <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="language-selector">
+                    <select id="language">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                <li><a href="about.html" data-key="nav.about">À Propos</a></li>
+                <li><a href="service.html" data-key="nav.services">Services</a></li>
+                <li><a href="gallery.html" class="active" data-key="nav.projects">Projets</a></li>
+                <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="container gallery-hero-content">
+            <h1 data-key="gallery.heroTitle">Nos Projets</h1>
+            <p data-key="gallery.heroSubtitle">Découvrez notre portfolio de réalisations qui témoigne de notre expertise et de notre engagement envers l'excellence.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="gallery.title">Galerie de Projets</h2>
+                <p data-key="gallery.subtitle">Explorez nos projets réalisés dans différents secteurs de la construction.</p>
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" data-key="gallery.filterAll">Tous</button>
+                <button class="filter-btn" data-filter="residential" data-key="gallery.filterResidential">Résidentiel</button>
+                <button class="filter-btn" data-filter="commercial" data-key="gallery.filterCommercial">Commercial</button>
+                <button class="filter-btn" data-filter="industrial" data-key="gallery.filterIndustrial">Industriel</button>
+            </div>
+            
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project 1 -->
+                <div class="project-card" data-category="residential">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Résidence Moderne">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project" data-project="1" data-key="gallery.viewProject">
+                                <i class="fas fa-expand"></i> Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category" data-key="gallery.residential">Résidentiel</span>
+                        <h3 data-key="gallery.project1.title">Résidence Moderne</h3>
+                        <p data-key="gallery.project1.description">Construction d'une résidence contemporaine avec des matériaux durables et des finitions de haute qualité.</p>
+                        <div class="project-details">
+                            <span><i class="far fa-calendar"></i> <span data-key="gallery.project1.date">2024</span></span>
+                            <span><i class="fas fa-map-marker-alt"></i> <span data-key="gallery.project1.location">Paris</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card" data-category="commercial">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Centre Commercial">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project" data-project="2" data-key="gallery.viewProject">
+                                <i class="fas fa-expand"></i> Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category" data-key="gallery.commercial">Commercial</span>
+                        <h3 data-key="gallery.project2.title">Centre Commercial</h3>
+                        <p data-key="gallery.project2.description">Conception et construction d'un centre commercial innovant avec des espaces commerciaux et de détente.</p>
+                        <div class="project-details">
+                            <span><i class="far fa-calendar"></i> <span data-key="gallery.project2.date">2023</span></span>
+                            <span><i class="fas fa-map-marker-alt"></i> <span data-key="gallery.project2.location">Lyon</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Complexe Industriel">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project" data-project="3" data-key="gallery.viewProject">
+                                <i class="fas fa-expand"></i> Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category" data-key="gallery.industrial">Industriel</span>
+                        <h3 data-key="gallery.project3.title">Complexe Industriel</h3>
+                        <p data-key="gallery.project3.description">Réalisation d'un complexe industriel avec des installations modernes et respectueuses de l'environnement.</p>
+                        <div class="project-details">
+                            <span><i class="far fa-calendar"></i> <span data-key="gallery.project3.date">2023</span></span>
+                            <span><i class="fas fa-map-marker-alt"></i> <span data-key="gallery.project3.location">Marseille</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card" data-category="residential">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Appartements de Luxe">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project" data-project="4" data-key="gallery.viewProject">
+                                <i class="fas fa-expand"></i> Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category" data-key="gallery.residential">Résidentiel</span>
+                        <h3 data-key="gallery.project4.title">Appartements de Luxe</h3>
+                        <p data-key="gallery.project4.description">Construction d'un immeuble résidentiel de luxe avec des équipements haut de gamme et une vue panoramique.</p>
+                        <div class="project-details">
+                            <span><i class="far fa-calendar"></i> <span data-key="gallery.project4.date">2022</span></span>
+                            <span><i class="fas fa-map-marker-alt"></i> <span data-key="gallery.project4.location">Nice</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card" data-category="commercial">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bureaux Corporatifs">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project" data-project="5" data-key="gallery.viewProject">
+                                <i class="fas fa-expand"></i> Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category" data-key="gallery.commercial">Commercial</span>
+                        <h3 data-key="gallery.project5.title">Bureaux Corporatifs</h3>
+                        <p data-key="gallery.project5.description">Aménagement d'espaces de bureaux modernes avec des designs ergonomiques et des technologies avancées.</p>
+                        <div class="project-details">
+                            <span><i class="far fa-calendar"></i> <span data-key="gallery.project5.date">2022</span></span>
+                            <span><i class="fas fa-map-marker-alt"></i> <span data-key="gallery.project5.location">Toulouse</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Usine Automatisée">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project" data-project="6" data-key="gallery.viewProject">
+                                <i class="fas fa-expand"></i> Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category" data-key="gallery.industrial">Industriel</span>
+                        <h3 data-key="gallery.project6.title">Usine Automatisée</h3>
+                        <p data-key="gallery.project6.description">Construction d'une usine hautement automatisée avec des systèmes de production innovants et écologiques.</p>
+                        <div class="project-details">
+                            <span><i class="far fa-calendar"></i> <span data-key="gallery.project6.date">2021</span></span>
+                            <span><i class="fas fa-map-marker-alt"></i> <span data-key="gallery.project6.location">Lille</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="project-gallery">
+                <div class="gallery-slider" id="gallerySlider">
+                    <!-- Slides will be populated by JavaScript -->
+                </div>
+                <div class="gallery-prev" id="galleryPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="gallery-next" id="galleryNext">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="gallery-nav" id="galleryNav">
+                    <!-- Dots will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="project-detail-content">
+                <div class="project-detail-header">
+                    <span class="project-detail-category" id="modalCategory">Résidentiel</span>
+                    <h2 id="modalTitle">Résidence Moderne</h2>
+                    <div class="project-detail-meta">
+                        <span><i class="far fa-calendar"></i> <span id="modalDate">2024</span></span>
+                        <span><i class="fas fa-map-marker-alt"></i> <span id="modalLocation">Paris</span></span>
+                        <span><i class="far fa-clock"></i> <span id="modalDuration">12 mois</span></span>
+                    </div>
+                </div>
+                <div class="project-detail-body">
+                    <div class="project-description">
+                        <h3 data-key="gallery.projectDescription">Description du Projet</h3>
+                        <p id="modalDescription">Construction d'une résidence contemporaine avec des matériaux durables et des finitions de haute qualité.</p>
+                        <p id="modalFullDescription">Ce projet résidentiel moderne a été conçu pour offrir un cadre de vie exceptionnel avec des espaces optimisés, une isolation thermique performante et des équipements haut de gamme. L'architecture épurée met en valeur les volumes et la lumière naturelle, créant une harmonie entre intérieur et extérieur.</p>
+                    </div>
+                    <div class="project-specs">
+                        <h3 data-key="gallery.projectSpecs">Spécifications</h3>
+                        <ul class="specs-list" id="modalSpecs">
+                            <!-- Specifications will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-key="footer.company">Construction 360</h3>
+                    <p data-key="footer.description">Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.quickLinks">Liens Rapides</h3>
+                    <ul>
+                        <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                        <li><a href="about.html" data-key="nav.about">À Propos</a></li>
+                        <li><a href="service.html" data-key="nav.services">Services</a></li>
+                        <li><a href="gallery.html" data-key="nav.projects">Projets</a></li>
+                        <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.services">Services</h3>
+                    <ul>
+                        <li><a href="service.html" data-key="services.conception.title">Conception</a></li>
+                        <li><a href="service.html" data-key="services.design.title">Design</a></li>
+                        <li><a href="service.html" data-key="services.execution.title">Exécution</a></li>
+                        <li><a href="service.html" data-key="footer.consultation">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.contact">Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-key="footer.copyright">&copy; 2025 Construction 360. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language data
+        const translations = {
+            fr: {
+                // Navigation
+                "nav.home": "Accueil",
+                "nav.about": "À Propos",
+                "nav.services": "Services",
+                "nav.projects": "Projets",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Gallery Hero Section
+                "gallery.heroTitle": "Nos Projets",
+                "gallery.heroSubtitle": "Découvrez notre portfolio de réalisations qui témoigne de notre expertise et de notre engagement envers l'excellence.",
+                
+                // Gallery Section
+                "gallery.title": "Galerie de Projets",
+                "gallery.subtitle": "Explorez nos projets réalisés dans différents secteurs de la construction.",
+                "gallery.filterAll": "Tous",
+                "gallery.filterResidential": "Résidentiel",
+                "gallery.filterCommercial": "Commercial",
+                "gallery.filterIndustrial": "Industriel",
+                "gallery.residential": "Résidentiel",
+                "gallery.commercial": "Commercial",
+                "gallery.industrial": "Industriel",
+                "gallery.viewProject": "Voir le projet",
+                
+                // Project 1
+                "gallery.project1.title": "Résidence Moderne",
+                "gallery.project1.description": "Construction d'une résidence contemporaine avec des matériaux durables et des finitions de haute qualité.",
+                "gallery.project1.date": "2024",
+                "gallery.project1.location": "Paris",
+                
+                // Project 2
+                "gallery.project2.title": "Centre Commercial",
+                "gallery.project2.description": "Conception et construction d'un centre commercial innovant avec des espaces commerciaux et de détente.",
+                "gallery.project2.date": "2023",
+                "gallery.project2.location": "Lyon",
+                
+                // Project 3
+                "gallery.project3.title": "Complexe Industriel",
+                "gallery.project3.description": "Réalisation d'un complexe industriel avec des installations modernes et respectueuses de l'environnement.",
+                "gallery.project3.date": "2023",
+                "gallery.project3.location": "Marseille",
+                
+                // Project 4
+                "gallery.project4.title": "Appartements de Luxe",
+                "gallery.project4.description": "Construction d'un immeuble résidentiel de luxe avec des équipements haut de gamme et une vue panoramique.",
+                "gallery.project4.date": "2022",
+                "gallery.project4.location": "Nice",
+                
+                // Project 5
+                "gallery.project5.title": "Bureaux Corporatifs",
+                "gallery.project5.description": "Aménagement d'espaces de bureaux modernes avec des designs ergonomiques et des technologies avancées.",
+                "gallery.project5.date": "2022",
+                "gallery.project5.location": "Toulouse",
+                
+                // Project 6
+                "gallery.project6.title": "Usine Automatisée",
+                "gallery.project6.description": "Construction d'une usine hautement automatisée avec des systèmes de production innovants et écologiques.",
+                "gallery.project6.date": "2021",
+                "gallery.project6.location": "Lille",
+                
+                // Modal
+                "gallery.projectDescription": "Description du Projet",
+                "gallery.projectSpecs": "Spécifications",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.",
+                "footer.quickLinks": "Liens Rapides",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Avenue de la Construction, Paris",
+                "footer.copyright": "© 2025 Construction 360. Tous droits réservés."
+            },
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.projects": "Projects",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Gallery Hero Section
+                "gallery.heroTitle": "Our Projects",
+                "gallery.heroSubtitle": "Discover our portfolio of achievements that demonstrates our expertise and commitment to excellence.",
+                
+                // Gallery Section
+                "gallery.title": "Project Gallery",
+                "gallery.subtitle": "Explore our completed projects in different construction sectors.",
+                "gallery.filterAll": "All",
+                "gallery.filterResidential": "Residential",
+                "gallery.filterCommercial": "Commercial",
+                "gallery.filterIndustrial": "Industrial",
+                "gallery.residential": "Residential",
+                "gallery.commercial": "Commercial",
+                "gallery.industrial": "Industrial",
+                "gallery.viewProject": "View Project",
+                
+                // Project 1
+                "gallery.project1.title": "Modern Residence",
+                "gallery.project1.description": "Construction of a contemporary residence with sustainable materials and high-quality finishes.",
+                "gallery.project1.date": "2024",
+                "gallery.project1.location": "Paris",
+                
+                // Project 2
+                "gallery.project2.title": "Shopping Center",
+                "gallery.project2.description": "Design and construction of an innovative shopping center with commercial and leisure spaces.",
+                "gallery.project2.date": "2023",
+                "gallery.project2.location": "Lyon",
+                
+                // Project 3
+                "gallery.project3.title": "Industrial Complex",
+                "gallery.project3.description": "Realization of an industrial complex with modern and environmentally friendly facilities.",
+                "gallery.project3.date": "2023",
+                "gallery.project3.location": "Marseille",
+                
+                // Project 4
+                "gallery.project4.title": "Luxury Apartments",
+                "gallery.project4.description": "Construction of a luxury residential building with high-end amenities and panoramic views.",
+                "gallery.project4.date": "2022",
+                "gallery.project4.location": "Nice",
+                
+                // Project 5
+                "gallery.project5.title": "Corporate Offices",
+                "gallery.project5.description": "Development of modern office spaces with ergonomic designs and advanced technologies.",
+                "gallery.project5.date": "2022",
+                "gallery.project5.location": "Toulouse",
+                
+                // Project 6
+                "gallery.project6.title": "Automated Factory",
+                "gallery.project6.description": "Construction of a highly automated factory with innovative and ecological production systems.",
+                "gallery.project6.date": "2021",
+                "gallery.project6.location": "Lille",
+                
+                // Modal
+                "gallery.projectDescription": "Project Description",
+                "gallery.projectSpecs": "Specifications",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Your trusted partner for all your construction projects, from conception to execution.",
+                "footer.quickLinks": "Quick Links",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Construction Avenue, Paris",
+                "footer.copyright": "© 2025 Construction 360. All rights reserved."
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'fr';
+
+        // Function to update all text content
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update language selector
+            document.getElementById('language').value = lang;
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+        
+        // Language Selector
+        const languageSelector = document.getElementById('language');
+        languageSelector.addEventListener('change', function() {
+            updateLanguage(this.value);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Project Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Project Data
+        const projects = {
+            1: {
+                title: "Résidence Moderne",
+                category: "Résidentiel",
+                date: "2024",
+                location: "Paris",
+                duration: "12 mois",
+                description: "Construction d'une résidence contemporaine avec des matériaux durables et des finitions de haute qualité.",
+                fullDescription: "Ce projet résidentiel moderne a été conçu pour offrir un cadre de vie exceptionnel avec des espaces optimisés, une isolation thermique performante et des équipements haut de gamme. L'architecture épurée met en valeur les volumes et la lumière naturelle, créant une harmonie entre intérieur et extérieur.",
+                images: [
+                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                specs: [
+                    { label: "Surface", value: "250 m²" },
+                    { label: "Chambres", value: "4" },
+                    { label: "Salles de bain", value: "3" },
+                    { label: "Matériaux", value: "Béton, Verre, Bois" },
+                    { label: "Énergie", value: "Classe A" }
+                ]
+            },
+            2: {
+                title: "Centre Commercial",
+                category: "Commercial",
+                date: "2023",
+                location: "Lyon",
+                duration: "18 mois",
+                description: "Conception et construction d'un centre commercial innovant avec des espaces commerciaux et de détente.",
+                fullDescription: "Ce centre commercial moderne intègre des solutions innovantes pour offrir une expérience client unique. Avec plus de 50 boutiques, un espace food court et une aire de jeux pour enfants, il est devenu un lieu de vie incontournable dans la région.",
+                images: [
+                    "https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1558618666-fcd25856cd7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                specs: [
+                    { label: "Surface", value: "15 000 m²" },
+                    { label: "Boutiques", value: "50+" },
+                    { label: "Parking", value: "600 places" },
+                    { label: "Architecte", value: "Jean Dupont" },
+                    { label: "Budget", value: "25M €" }
+                ]
+            },
+            3: {
+                title: "Complexe Industriel",
+                category: "Industriel",
+                date: "2023",
+                location: "Marseille",
+                duration: "24 mois",
+                description: "Réalisation d'un complexe industriel avec des installations modernes et respectueuses de l'environnement.",
+                fullDescription: "Ce complexe industriel de pointe intègre les dernières technologies de production tout en respectant les normes environnementales les plus strictes. Conçu pour une efficacité énergétique maximale, il représente l'avenir de l'industrie durable.",
+                images: [
+                    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1581094794358-8460c6c75e27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                specs: [
+                    { label: "Surface", value: "20 000 m²" },
+                    { label: "Employés", value: "300" },
+                    { label: "Production", value: "10 000 unités/jour" },
+                    { label: "Certification", value: "ISO 14001" },
+                    { label: "Investissement", value: "40M €" }
+                ]
+            },
+            4: {
+                title: "Appartements de Luxe",
+                category: "Résidentiel",
+                date: "2022",
+                location: "Nice",
+                duration: "20 mois",
+                description: "Construction d'un immeuble résidentiel de luxe avec des équipements haut de gamme et une vue panoramique.",
+                fullDescription: "Cet immeuble résidentiel de luxe offre des appartements spacieux avec des finitions exceptionnelles et une vue imprenable sur la mer Méditerranée. Chaque détail a été pensé pour le confort et l'élégance, des matériaux nobles aux équipements intelligents.",
+                images: [
+                    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600566752734-45b8d1b16c07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                specs: [
+                    { label: "Appartements", value: "24" },
+                    { label: "Étages", value: "8" },
+                    { label: "Piscine", value: "Infinity" },
+                    { label: "Ascenseurs", value: "3" },
+                    { label: "Sécurité", value: "24/7" }
+                ]
+            },
+            5: {
+                title: "Bureaux Corporatifs",
+                category: "Commercial",
+                date: "2022",
+                location: "Toulouse",
+                duration: "14 mois",
+                description: "Aménagement d'espaces de bureaux modernes avec des designs ergonomiques et des technologies avancées.",
+                fullDescription: "Ces bureaux corporatifs ont été conçus pour favoriser la collaboration et le bien-être au travail. Avec des espaces modulables, une abondance de lumière naturelle et des technologies de pointe, ils offrent un environnement de travail optimal pour les équipes modernes.",
+                images: [
+                    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                specs: [
+                    { label: "Surface", value: "8 000 m²" },
+                    { label: "Salles de réunion", value: "15" },
+                    { label: "Espaces communs", value: "Cafétéria, Lounge" },
+                    { label: "Technologie", value: "Fibre, Wi-Fi 6" },
+                    { label: "Certification", value: "WELL" }
+                ]
+            },
+            6: {
+                title: "Usine Automatisée",
+                category: "Industriel",
+                date: "2021",
+                location: "Lille",
+                duration: "30 mois",
+                description: "Construction d'une usine hautement automatisée avec des systèmes de production innovants et écologiques.",
+                fullDescription: "Cette usine automatisée représente un saut technologique dans le secteur industriel. Avec des robots collaboratifs, des systèmes de contrôle intelligents et une gestion des déchets optimisée, elle établit de nouvelles normes en matière d'efficacité et de durabilité.",
+                images: [
+                    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1581094794358-8460c6c75e27?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1581094794369-82f58c5caf08?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                specs: [
+                    { label: "Surface", value: "25 000 m²" },
+                    { label: "Automation", value: "95%" },
+                    { label: "Production", value: "50 000 unités/jour" },
+                    { label: "Énergie", value: "Solaire + Éolien" },
+                    { label: "Recyclage", value: "90% des déchets" }
+                ]
+            }
+        };
+
+        // Project Modal
+        const modal = document.getElementById('projectModal');
+        const closeModal = document.getElementById('closeModal');
+        const viewProjectButtons = document.querySelectorAll('.view-project');
+        const gallerySlider = document.getElementById('gallerySlider');
+        const galleryNav = document.getElementById('galleryNav');
+        const galleryPrev = document.getElementById('galleryPrev');
+        const galleryNext = document.getElementById('galleryNext');
+        
+        let currentGallerySlide = 0;
+        let currentProjectId = null;
+        
+        // Open modal when clicking on a project
+        viewProjectButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentProjectId = button.getAttribute('data-project');
+                openProjectModal(currentProjectId);
+            });
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Function to open project modal
+        function openProjectModal(projectId) {
+            const project = projects[projectId];
+            
+            if (!project) return;
+            
+            // Update modal content
+            document.getElementById('modalCategory').textContent = project.category;
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalDate').textContent = project.date;
+            document.getElementById('modalLocation').textContent = project.location;
+            document.getElementById('modalDuration').textContent = project.duration;
+            document.getElementById('modalDescription').textContent = project.description;
+            document.getElementById('modalFullDescription').textContent = project.fullDescription;
+            
+            // Update images
+            gallerySlider.innerHTML = '';
+            galleryNav.innerHTML = '';
+            
+            project.images.forEach((image, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide';
+                slide.innerHTML = `<img src="${image}" alt="${project.title}">`;
+                gallerySlider.appendChild(slide);
+                
+                const dot = document.createElement('div');
+                dot.className = `gallery-dot ${index === 0 ? 'active' : ''}`;
+                dot.addEventListener('click', () => showGallerySlide(index));
+                galleryNav.appendChild(dot);
+            });
+            
+            // Update specifications
+            const specsList = document.getElementById('modalSpecs');
+            specsList.innerHTML = '';
+            
+            project.specs.forEach(spec => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="spec-label">${spec.label}</span>
+                    <span class="spec-value">${spec.value}</span>
+                `;
+                specsList.appendChild(li);
+            });
+            
+            // Reset gallery
+            currentGallerySlide = 0;
+            showGallerySlide(0);
+            
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Gallery navigation
+        function showGallerySlide(index) {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const dots = document.querySelectorAll('.gallery-dot');
+            
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+            
+            gallerySlider.style.transform = `translateX(-${index * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            currentGallerySlide = index;
+        }
+        
+        galleryPrev.addEventListener('click', () => {
+            showGallerySlide(currentGallerySlide - 1);
+        });
+        
+        galleryNext.addEventListener('click', () => {
+            showGallerySlide(currentGallerySlide + 1);
+        });
+        
+        // Auto slide gallery
+        let galleryInterval;
+        
+        function startGalleryAutoSlide() {
+            galleryInterval = setInterval(() => {
+                showGallerySlide(currentGallerySlide + 1);
+            }, 5000);
+        }
+        
+        function stopGalleryAutoSlide() {
+            clearInterval(galleryInterval);
+        }
+        
+        // Start auto slide when modal opens
+        modal.addEventListener('mouseenter', stopGalleryAutoSlide);
+        modal.addEventListener('mouseleave', startGalleryAutoSlide);
+        
+        // Initialize with French language
+        updateLanguage('fr');
+    </script>
+</body>
 </html>
