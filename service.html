@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Services - Construction 360</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-blue: #0056B3;
+            --primary-grey: #333333;
+            --light-grey: #F5F5F5;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--primary-grey);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-yellow);
+            color: var(--primary-yellow);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-yellow);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo-text span {
+            color: var(--primary-yellow);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-grey);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-yellow);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .language-selector {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .language-selector select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--white);
+            cursor: pointer;
+            appearance: none;
+            padding-right: 30px;
+        }
+
+        .language-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+            margin-left: 20px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            display: none;
+            z-index: 999;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav ul li {
+            margin: 15px 0;
+        }
+        
+        .mobile-nav ul li a {
+            color: var(--primary-grey);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1503387769-00ec40549e48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumb li {
+            margin: 0 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: '>';
+            margin-left: 10px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-yellow);
+            text-decoration: none;
+        }
+
+        /* Services Overview */
+        .services-overview {
+            padding: 100px 0;
+            background-color: var(--light-grey);
+        }
+
+        .services-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .services-intro h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .services-intro p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Main Services Section */
+        .main-services {
+            padding: 100px 0;
+        }
+
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            background-color: var(--white);
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .service-tab-content {
+            display: none;
+        }
+
+        .service-tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .service-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .service-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .service-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .service-info h3 {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            margin: 30px 0;
+        }
+
+        .service-features h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .service-features ul {
+            list-style: none;
+        }
+
+        .service-features li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-yellow);
+            font-weight: bold;
+        }
+
+        /* Process Section */
+        .process {
+            background-color: var(--light-grey);
+            padding: 100px 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .process-step i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .process-step h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Additional Services */
+        .additional-services {
+            padding: 100px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .card-content {
+            padding: 30px 25px;
+        }
+
+        .card-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .btn {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        .cta .btn:hover {
+            background-color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-grey);
+            color: var(--white);
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .service-detail {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .services-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .services-intro h2 {
+                font-size: 2rem;
+            }
+            
+            .service-info h3 {
+                font-size: 1.7rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .logo-image {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-image">
+                   <img src="./IMG-20250926-WA0032(1).jpg" alt="Construction 360 Logo">
+                </div>
+                <div class="logo-text">CONSTRUCTO<span>360</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                    <li><a href="about.html" data-key="nav.about">À Propos</a></li>
+                    <li><a href="services.html" class="active" data-key="nav.services">Services</a></li>
+                    <li><a href="projects.html" data-key="nav.projects">Projets</a></li>
+                    <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                    <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="language-selector">
+                    <select id="language">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="./index.html" data-key="nav.home">Accueil</a></li>
+                <li><a href="./about.html" data-key="nav.about">À Propos</a></li>
+                <li><a href="./service.html" class="active" data-key="nav.services">Services</a></li>
+                <li><a href="./gallery.html" data-key="nav.projects">Projets</a></li>
+                <li><a href="./blog.html" data-key="nav.blog">Blog</a></li>
+                <li><a href="./contact.html" data-key="nav.contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container page-header-content">
+            <h1 data-key="services.title">Nos Services</h1>
+            <ul class="breadcrumb">
+                <li><a href="index.html" data-key="breadcrumb.home">Accueil</a></li>
+                <li data-key="breadcrumb.services">Services</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <div class="container">
+            <div class="services-intro">
+                <h2 data-key="services.overview.title">Une Approche Complète de la Construction</h2>
+                <p data-key="services.overview.description">Chez Construction 360, nous offrons une gamme complète de services de construction, de la conception initiale à la livraison finale. Notre approche intégrée garantit une cohérence et une excellence à chaque étape de votre projet.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Services Section -->
+    <section class="main-services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="services.main.title">Nos Services Principaux</h2>
+                <p data-key="services.main.subtitle">Découvrez nos trois piliers fondamentaux pour des projets de construction réussis</p>
+            </div>
+
+            <div class="services-tabs">
+                <button class="tab-btn active" data-tab="conception" data-key="services.tabs.conception">Conception</button>
+                <button class="tab-btn" data-tab="design" data-key="services.tabs.design">Design</button>
+                <button class="tab-btn" data-tab="execution" data-key="services.tabs.execution">Exécution</button>
+            </div>
+
+            <!-- Conception Tab -->
+            <div class="service-tab-content active" id="conception-tab">
+                <div class="service-detail">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1541976590-713941681591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de Conception">
+                    </div>
+                    <div class="service-info">
+                        <h3 data-key="services.conception.title">Conception et Planification</h3>
+                        <p data-key="services.conception.description">Notre service de conception transforme vos idées en plans détaillés et réalisables. Nous nous assurons que chaque aspect de votre projet est soigneusement planifié avant le début des travaux.</p>
+                        
+                        <div class="service-features">
+                            <h4 data-key="services.features">Ce que nous offrons:</h4>
+                            <ul>
+                                <li data-key="services.conception.feature1">Études de faisabilité et analyses de site</li>
+                                <li data-key="services.conception.feature2">Planification architecturale détaillée</li>
+                                <li data-key="services.conception.feature3">Optimisation de l'espace et de la fonctionnalité</li>
+                                <li data-key="services.conception.feature4">Conformité aux réglementations et normes</li>
+                                <li data-key="services.conception.feature5">Élaboration des budgets et calendriers</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="contact.html" class="btn" data-key="services.consultation">Demander une Consultation</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Tab -->
+            <div class="service-tab-content" id="design-tab">
+                <div class="service-detail">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de Design">
+                    </div>
+                    <div class="service-info">
+                        <h3 data-key="services.design.title">Design et Ingénierie</h3>
+                        <p data-key="services.design.description">Notre équipe de designers et d'ingénieurs travaille en synergie pour créer des espaces esthétiques, fonctionnels et structurellement solides qui répondent à vos besoins spécifiques.</p>
+                        
+                        <div class="service-features">
+                            <h4 data-key="services.features">Ce que nous offrons:</h4>
+                            <ul>
+                                <li data-key="services.design.feature1">Design intérieur et extérieur personnalisé</li>
+                                <li data-key="services.design.feature2">Ingénierie structurelle détaillée</li>
+                                <li data-key="services.design.feature3">Sélection des matériaux et finitions</li>
+                                <li data-key="services.design.feature4">Solutions durables et écologiques</li>
+                                <li data-key="services.design.feature5">Visualisations 3D et rendus réalistes</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="contact.html" class="btn" data-key="services.consultation">Demander une Consultation</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Execution Tab -->
+            <div class="service-tab-content" id="execution-tab">
+                <div class="service-detail">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service d'Exécution">
+                    </div>
+                    <div class="service-info">
+                        <h3 data-key="services.execution.title">Exécution et Gestion de Projet</h3>
+                        <p data-key="services.execution.description">Notre équipe d'exécution transforme les plans en réalité, en garantissant une construction de qualité supérieure, dans les délais et le budget convenus.</p>
+                        
+                        <div class="service-features">
+                            <h4 data-key="services.features">Ce que nous offrons:</h4>
+                            <ul>
+                                <li data-key="services.execution.feature1">Gestion complète de chantier</li>
+                                <li data-key="services.execution.feature2">Coordination des sous-traitants</li>
+                                <li data-key="services.execution.feature3">Contrôle qualité rigoureux</li>
+                                <li data-key="services.execution.feature4">Respect des délais et budgets</li>
+                                <li data-key="services.execution.feature5">Livraison clé en main</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="contact.html" class="btn" data-key="services.consultation">Demander une Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="services.process.title">Notre Processus en 4 Étapes</h2>
+                <p data-key="services.process.subtitle">Une méthodologie éprouvée pour garantir le succès de votre projet</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-lightbulb"></i>
+                    <h3 data-key="services.process.step1.title">Consultation</h3>
+                    <p data-key="services.process.step1.description">Nous écoutons vos besoins et analysons la faisabilité de votre projet.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-pencil-ruler"></i>
+                    <h3 data-key="services.process.step2.title">Conception</h3>
+                    <p data-key="services.process.step2.description">Nous créons des plans détaillés et des designs personnalisés.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-hard-hat"></i>
+                    <h3 data-key="services.process.step3.title">Exécution</h3>
+                    <p data-key="services.process.step3.description">Nous construisons avec précision en respectant les délais.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <i class="fas fa-home"></i>
+                    <h3 data-key="services.process.step4.title">Livraison</h3>
+                    <p data-key="services.process.step4.description">Nous vous remettons les clés de votre projet réalisé.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services -->
+    <section class="additional-services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="services.additional.title">Services Complémentaires</h2>
+                <p data-key="services.additional.subtitle">Des solutions spécialisées pour répondre à tous vos besoins en construction</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="card-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 data-key="services.additional.renovation">Rénovation</h3>
+                        <p data-key="services.additional.renovationDesc">Transformation et modernisation d'espaces existants avec des matériaux de qualité.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 data-key="services.additional.extension">Extension</h3>
+                        <p data-key="services.additional.extensionDesc">Agrandissement de votre propriété avec une intégration harmonieuse.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 data-key="services.additional.sustainable">Construction Durable</h3>
+                        <p data-key="services.additional.sustainableDesc">Solutions écologiques et économes en énergie pour un avenir meilleur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 data-key="services.cta.title">Prêt à Démarrer Votre Projet?</h2>
+            <p data-key="services.cta.description">Contactez-nous dès aujourd'hui pour une consultation gratuite et découvrez comment nous pouvons transformer votre vision en réalité.</p>
+            <a href="contact.html" class="btn" data-key="services.cta.button">Obtenir un Devis Gratuit</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-key="footer.company">Construction 360</h3>
+                    <p data-key="footer.description">Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.quickLinks">Liens Rapides</h3>
+                    <ul>
+                        <li><a href="./index.html" data-key="nav.home">Accueil</a></li>
+                        <li><a href="./about.html" data-key="nav.about">À Propos</a></li>
+                        <li><a href="./service.html" data-key="nav.services">Services</a></li>
+                        <li><a href="./gallery.html" data-key="nav.projects">Projets</a></li>
+                        <li><a href="./blog.html" data-key="nav.blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.services">Services</h3>
+                    <ul>
+                        <li><a href="services.html" data-key="services.conception.title">Conception</a></li>
+                        <li><a href="services.html" data-key="services.design.title">Design</a></li>
+                        <li><a href="services.html" data-key="services.execution.title">Exécution</a></li>
+                        <li><a href="services.html" data-key="footer.consultation">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.contact">Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-key="footer.copyright">&copy; 2023 Construction 360. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language data
+        const translations = {
+            fr: {
+                // Navigation
+                "nav.home": "Accueil",
+                "nav.about": "À Propos",
+                "nav.services": "Services",
+                "nav.projects": "Projets",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Breadcrumb
+                "breadcrumb.home": "Accueil",
+                "breadcrumb.services": "Services",
+                
+                // Services Page
+                "services.title": "Nos Services",
+                "services.overview.title": "Une Approche Complète de la Construction",
+                "services.overview.description": "Chez Construction 360, nous offrons une gamme complète de services de construction, de la conception initiale à la livraison finale. Notre approche intégrée garantit une cohérence et une excellence à chaque étape de votre projet.",
+                
+                // Main Services
+                "services.main.title": "Nos Services Principaux",
+                "services.main.subtitle": "Découvrez nos trois piliers fondamentaux pour des projets de construction réussis",
+                "services.tabs.conception": "Conception",
+                "services.tabs.design": "Design",
+                "services.tabs.execution": "Exécution",
+                
+                // Conception Service
+                "services.conception.title": "Conception et Planification",
+                "services.conception.description": "Notre service de conception transforme vos idées en plans détaillés et réalisables. Nous nous assurons que chaque aspect de votre projet est soigneusement planifié avant le début des travaux.",
+                "services.conception.feature1": "Études de faisabilité et analyses de site",
+                "services.conception.feature2": "Planification architecturale détaillée",
+                "services.conception.feature3": "Optimisation de l'espace et de la fonctionnalité",
+                "services.conception.feature4": "Conformité aux réglementations et normes",
+                "services.conception.feature5": "Élaboration des budgets et calendriers",
+                
+                // Design Service
+                "services.design.title": "Design et Ingénierie",
+                "services.design.description": "Notre équipe de designers et d'ingénieurs travaille en synergie pour créer des espaces esthétiques, fonctionnels et structurellement solides qui répondent à vos besoins spécifiques.",
+                "services.design.feature1": "Design intérieur et extérieur personnalisé",
+                "services.design.feature2": "Ingénierie structurelle détaillée",
+                "services.design.feature3": "Sélection des matériaux et finitions",
+                "services.design.feature4": "Solutions durables et écologiques",
+                "services.design.feature5": "Visualisations 3D et rendus réalistes",
+                
+                // Execution Service
+                "services.execution.title": "Exécution et Gestion de Projet",
+                "services.execution.description": "Notre équipe d'exécution transforme les plans en réalité, en garantissant une construction de qualité supérieure, dans les délais et le budget convenus.",
+                "services.execution.feature1": "Gestion complète de chantier",
+                "services.execution.feature2": "Coordination des sous-traitants",
+                "services.execution.feature3": "Contrôle qualité rigoureux",
+                "services.execution.feature4": "Respect des délais et budgets",
+                "services.execution.feature5": "Livraison clé en main",
+                
+                // Common
+                "services.features": "Ce que nous offrons:",
+                "services.consultation": "Demander une Consultation",
+                
+                // Process Section
+                "services.process.title": "Notre Processus en 4 Étapes",
+                "services.process.subtitle": "Une méthodologie éprouvée pour garantir le succès de votre projet",
+                "services.process.step1.title": "Consultation",
+                "services.process.step1.description": "Nous écoutons vos besoins et analysons la faisabilité de votre projet.",
+                "services.process.step2.title": "Conception",
+                "services.process.step2.description": "Nous créons des plans détaillés et des designs personnalisés.",
+                "services.process.step3.title": "Exécution",
+                "services.process.step3.description": "Nous construisons avec précision en respectant les délais.",
+                "services.process.step4.title": "Livraison",
+                "services.process.step4.description": "Nous vous remettons les clés de votre projet réalisé.",
+                
+                // Additional Services
+                "services.additional.title": "Services Complémentaires",
+                "services.additional.subtitle": "Des solutions spécialisées pour répondre à tous vos besoins en construction",
+                "services.additional.renovation": "Rénovation",
+                "services.additional.renovationDesc": "Transformation et modernisation d'espaces existants avec des matériaux de qualité.",
+                "services.additional.extension": "Extension",
+                "services.additional.extensionDesc": "Agrandissement de votre propriété avec une intégration harmonieuse.",
+                "services.additional.sustainable": "Construction Durable",
+                "services.additional.sustainableDesc": "Solutions écologiques et économes en énergie pour un avenir meilleur.",
+                
+                // CTA Section
+                "services.cta.title": "Prêt à Démarrer Votre Projet?",
+                "services.cta.description": "Contactez-nous dès aujourd'hui pour une consultation gratuite et découvrez comment nous pouvons transformer votre vision en réalité.",
+                "services.cta.button": "Obtenir un Devis Gratuit",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.",
+                "footer.quickLinks": "Liens Rapides",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Avenue de la Construction, Paris",
+                "footer.copyright": "© 2023 Construction 360. Tous droits réservés."
+            },
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.projects": "Projects",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Breadcrumb
+                "breadcrumb.home": "Home",
+                "breadcrumb.services": "Services",
+                
+                // Services Page
+                "services.title": "Our Services",
+                "services.overview.title": "A Comprehensive Construction Approach",
+                "services.overview.description": "At Construction 360, we offer a complete range of construction services, from initial design to final delivery. Our integrated approach ensures consistency and excellence at every stage of your project.",
+                
+                // Main Services
+                "services.main.title": "Our Main Services",
+                "services.main.subtitle": "Discover our three fundamental pillars for successful construction projects",
+                "services.tabs.conception": "Conception",
+                "services.tabs.design": "Design",
+                "services.tabs.execution": "Execution",
+                
+                // Conception Service
+                "services.conception.title": "Design and Planning",
+                "services.conception.description": "Our design service transforms your ideas into detailed, achievable plans. We ensure every aspect of your project is carefully planned before work begins.",
+                "services.conception.feature1": "Feasibility studies and site analysis",
+                "services.conception.feature2": "Detailed architectural planning",
+                "services.conception.feature3": "Space and functionality optimization",
+                "services.conception.feature4": "Compliance with regulations and standards",
+                "services.conception.feature5": "Budget and schedule development",
+                
+                // Design Service
+                "services.design.title": "Design and Engineering",
+                "services.design.description": "Our team of designers and engineers work in synergy to create aesthetic, functional and structurally sound spaces that meet your specific needs.",
+                "services.design.feature1": "Custom interior and exterior design",
+                "services.design.feature2": "Detailed structural engineering",
+                "services.design.feature3": "Material and finish selection",
+                "services.design.feature4": "Sustainable and ecological solutions",
+                "services.design.feature5": "3D visualizations and realistic renderings",
+                
+                // Execution Service
+                "services.execution.title": "Execution and Project Management",
+                "services.execution.description": "Our execution team turns plans into reality, ensuring superior quality construction, on time and within agreed budget.",
+                "services.execution.feature1": "Complete site management",
+                "services.execution.feature2": "Subcontractor coordination",
+                "services.execution.feature3": "Rigorous quality control",
+                "services.execution.feature4": "Respect for deadlines and budgets",
+                "services.execution.feature5": "Turnkey delivery",
+                
+                // Common
+                "services.features": "What we offer:",
+                "services.consultation": "Request a Consultation",
+                
+                // Process Section
+                "services.process.title": "Our 4-Step Process",
+                "services.process.subtitle": "A proven methodology to ensure the success of your project",
+                "services.process.step1.title": "Consultation",
+                "services.process.step1.description": "We listen to your needs and analyze the feasibility of your project.",
+                "services.process.step2.title": "Design",
+                "services.process.step2.description": "We create detailed plans and customized designs.",
+                "services.process.step3.title": "Execution",
+                "services.process.step3.description": "We build with precision while respecting deadlines.",
+                "services.process.step4.title": "Delivery",
+                "services.process.step4.description": "We hand over the keys to your completed project.",
+                
+                // Additional Services
+                "services.additional.title": "Additional Services",
+                "services.additional.subtitle": "Specialized solutions to meet all your construction needs",
+                "services.additional.renovation": "Renovation",
+                "services.additional.renovationDesc": "Transformation and modernization of existing spaces with quality materials.",
+                "services.additional.extension": "Extension",
+                "services.additional.extensionDesc": "Expansion of your property with harmonious integration.",
+                "services.additional.sustainable": "Sustainable Construction",
+                "services.additional.sustainableDesc": "Ecological and energy-efficient solutions for a better future.",
+                
+                // CTA Section
+                "services.cta.title": "Ready to Start Your Project?",
+                "services.cta.description": "Contact us today for a free consultation and discover how we can transform your vision into reality.",
+                "services.cta.button": "Get a Free Quote",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Your trusted partner for all your construction projects, from conception to execution.",
+                "footer.quickLinks": "Quick Links",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Construction Avenue, Paris",
+                "footer.copyright": "© 2023 Construction 360. All rights reserved."
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'fr';
+
+        // Function to update all text content
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update language selector
+            document.getElementById('language').value = lang;
+        }
+
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.service-tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Language Selector
+        const languageSelector = document.getElementById('language');
+        languageSelector.addEventListener('change', function() {
+            updateLanguage(this.value);
+        });
+
+        // Initialize with French language
+        updateLanguage('fr');
+    </script>
+</body>
+</html>

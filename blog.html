@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Construction 360</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-blue: #0056B3;
+            --primary-grey: #333333;
+            --light-grey: #F5F5F5;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--primary-grey);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-yellow);
+            color: var(--primary-yellow);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-yellow);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo-text span {
+            color: var(--primary-yellow);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-grey);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-yellow);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .language-selector {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .language-selector select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--white);
+            cursor: pointer;
+            appearance: none;
+            padding-right: 30px;
+        }
+
+        .language-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+            margin-left: 20px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            display: none;
+            z-index: 999;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav ul li {
+            margin: 15px 0;
+        }
+        
+        .mobile-nav ul li a {
+            color: var(--primary-grey);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        /* Blog Hero Section */
+        .blog-hero {
+            position: relative;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blog-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .blog-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 80px 0;
+            background-color: var(--light-grey);
+        }
+
+        .blog-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .blog-posts {
+            display: grid;
+            gap: 40px;
+        }
+
+        .blog-post {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .blog-post:hover .post-image img {
+            transform: scale(1.05);
+        }
+
+        .post-content {
+            padding: 30px;
+        }
+
+        .post-meta {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .post-meta span {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-meta i {
+            margin-right: 5px;
+            color: var(--primary-blue);
+        }
+
+        .post-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .post-content p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background-color: var(--light-grey);
+            color: var(--primary-blue);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Blog Sidebar */
+        .blog-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-widget {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .widget-title {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-grey);
+        }
+
+        .search-form {
+            display: flex;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-button:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        .categories-list, .recent-posts-list {
+            list-style: none;
+        }
+
+        .categories-list li, .recent-posts-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .categories-list li:last-child, .recent-posts-list li:last-child {
+            border-bottom: none;
+        }
+
+        .categories-list a, .recent-posts-list a {
+            color: var(--primary-grey);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .categories-list a:hover, .recent-posts-list a:hover {
+            color: var(--primary-blue);
+        }
+
+        .categories-list .count {
+            background-color: var(--light-grey);
+            color: var(--primary-blue);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .recent-post {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .recent-post-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .recent-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recent-post-content h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .recent-post-content .post-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .tags-widget {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tags-widget .tag {
+            background-color: var(--light-grey);
+            color: var(--primary-blue);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .tags-widget .tag:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            background-color: var(--white);
+            color: var(--primary-grey);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .pagination a.active,
+        .pagination a:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-grey);
+            color: var(--white);
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-yellow);
+            color: var(--primary-grey);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .blog-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .post-content {
+                padding: 20px;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .blog-hero {
+                height: 40vh;
+            }
+            
+            .blog-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .logo-image {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-image">
+                   <img src="./IMG-20250926-WA0032(1).jpg" alt="Construction 360 Logo">
+                </div>
+                <div class="logo-text">CONSTRUCTO<span>360</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                    <li><a href="about.html" data-key="nav.about">À Propos</a></li>
+                    <li><a href="service.html" data-key="nav.services">Services</a></li>
+                    <li><a href="gallery.html" data-key="nav.projects">Projets</a></li>
+                    <li><a href="blog.html" class="active" data-key="nav.blog">Blog</a></li>
+                    <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="language-selector">
+                    <select id="language">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                <li><a href="about.html" data-key="nav.about">À Propos</a></li>
+                <li><a href="service.html" data-key="nav.services">Services</a></li>
+                <li><a href="gallery.html" data-key="nav.projects">Projets</a></li>
+                <li><a href="blog.html" class="active" data-key="nav.blog">Blog</a></li>
+                <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="container blog-hero-content">
+            <h1 data-key="blog.heroTitle">Blog Construction 360</h1>
+            <p data-key="blog.heroSubtitle">Découvrez les dernières actualités, innovations et conseils dans le domaine de la construction.</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="blog.title">Actualités & Conseils</h2>
+                <p data-key="blog.subtitle">Restez informé des dernières tendances et innovations dans l'industrie de la construction.</p>
+            </div>
+            
+            <div class="blog-container">
+                <div class="blog-posts">
+                    <!-- Blog Post 1 -->
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Construction durable">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> <span data-key="blog.post1.date">15 Mars 2025</span></span>
+                                <span><i class="far fa-user"></i> <span data-key="blog.post1.author">Jean Martin</span></span>
+                                <span><i class="far fa-folder"></i> <span data-key="blog.post1.category">Innovation</span></span>
+                            </div>
+                            <h3 data-key="blog.post1.title">Les Avantages de la Construction Durable en 2025</h3>
+                            <p data-key="blog.post1.excerpt">Découvrez comment les nouvelles technologies et matériaux écologiques transforment l'industrie de la construction, réduisant l'impact environnemental tout en améliorant l'efficacité énergétique.</p>
+                            <div class="post-tags">
+                                <span class="tag" data-key="blog.tags.sustainable">Durable</span>
+                                <span class="tag" data-key="blog.tags.innovation">Innovation</span>
+                                <span class="tag" data-key="blog.tags.eco">Écologie</span>
+                            </div>
+                            <a href="https://www.example-construction-news.com/sustainable-construction-2025" class="btn" target="_blank" data-key="blog.readMore">Lire l'article</a>
+                        </div>
+                    </article>
+                    
+                    <!-- Blog Post 2 -->
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-15033877699c6cbf66c8cad2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nouveaux matériaux">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> <span data-key="blog.post2.date">28 Février 2025</span></span>
+                                <span><i class="far fa-user"></i> <span data-key="blog.post2.author">Marie Lambert</span></span>
+                                <span><i class="far fa-folder"></i> <span data-key="blog.post2.category">Matériaux</span></span>
+                            </div>
+                            <h3 data-key="blog.post2.title">Les Nouveaux Matériaux de Construction Révolutionnaires</h3>
+                            <p data-key="blog.post2.excerpt">Explorez les matériaux innovants qui changent la façon dont nous construisons, des bétons auto-cicatrisants aux composites légers et résistants pour des structures plus durables.</p>
+                            <div class="post-tags">
+                                <span class="tag" data-key="blog.tags.materials">Matériaux</span>
+                                <span class="tag" data-key="blog.tags.technology">Technologie</span>
+                                <span class="tag" data-key="blog.tags.future">Futur</span>
+                            </div>
+                            <a href="https://www.example-building-materials.com/revolutionary-construction-materials" class="btn" target="_blank" data-key="blog.readMore">Lire l'article</a>
+                        </div>
+                    </article>
+                    
+                    <!-- Blog Post 3 -->
+                    <article class="blog-post">
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1541976590-713941681591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gestion de projet">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span><i class="far fa-calendar"></i> <span data-key="blog.post3.date">10 Février 2025</span></span>
+                                <span><i class="far fa-user"></i> <span data-key="blog.post3.author">Pierre Dubois</span></span>
+                                <span><i class="far fa-folder"></i> <span data-key="blog.post3.category">Gestion</span></span>
+                            </div>
+                            <h3 data-key="blog.post3.title">Optimiser la Gestion de Projet en Construction</h3>
+                            <p data-key="blog.post3.excerpt">Découvrez les meilleures pratiques et outils modernes pour une gestion de projet efficace, réduisant les délais et les coûts tout en maintenant une qualité exceptionnelle.</p>
+                            <div class="post-tags">
+                                <span class="tag" data-key="blog.tags.management">Gestion</span>
+                                <span class="tag" data-key="blog.tags.efficiency">Efficacité</span>
+                                <span class="tag" data-key="blog.tags.planning">Planification</span>
+                            </div>
+                            <a href="https://www.example-project-management.com/construction-project-optimization" class="btn" target="_blank" data-key="blog.readMore">Lire l'article</a>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Blog Sidebar -->
+                <div class="blog-sidebar">
+                    <!-- Search Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title" data-key="blog.search">Recherche</h3>
+                        <form class="search-form">
+                            <input type="text" class="search-input" placeholder="Rechercher..." data-key="blog.searchPlaceholder">
+                            <button type="submit" class="search-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title" data-key="blog.categories">Catégories</h3>
+                        <ul class="categories-list">
+                            <li>
+                                <a href="#" data-key="blog.category.innovation">Innovation <span class="count">5</span></a>
+                            </li>
+                            <li>
+                                <a href="#" data-key="blog.category.materials">Matériaux <span class="count">3</span></a>
+                            </li>
+                            <li>
+                                <a href="#" data-key="blog.category.management">Gestion <span class="count">4</span></a>
+                            </li>
+                            <li>
+                                <a href="#" data-key="blog.category.techniques">Techniques <span class="count">6</span></a>
+                            </li>
+                            <li>
+                                <a href="#" data-key="blog.category.regulations">Réglementations <span class="count">2</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title" data-key="blog.recentPosts">Articles Récents</h3>
+                        <div class="recent-posts-list">
+                            <div class="recent-post">
+                                <div class="recent-post-image">
+                                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Construction durable">
+                                </div>
+                                <div class="recent-post-content">
+                                    <h4 data-key="blog.post1.title">Les Avantages de la Construction Durable en 2025</h4>
+                                    <div class="post-date" data-key="blog.post1.date">15 Mars 2025</div>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <div class="recent-post-image">
+                                    <img src="https://images.unsplash.com/photo-1503387769-9c6cbf66c8cad2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nouveaux matériaux">
+                                </div>
+                                <div class="recent-post-content">
+                                    <h4 data-key="blog.post2.title">Les Nouveaux Matériaux de Construction Révolutionnaires</h4>
+                                    <div class="post-date" data-key="blog.post2.date">28 Février 2025</div>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <div class="recent-post-image">
+                                    <img src="https://images.unsplash.com/photo-1541976590-713941681591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Gestion de projet">
+                                </div>
+                                <div class="recent-post-content">
+                                    <h4 data-key="blog.post3.title">Optimiser la Gestion de Projet en Construction</h4>
+                                    <div class="post-date" data-key="blog.post3.date">10 Février 2025</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tags Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title" data-key="blog.tagsTitle">Tags</h3>
+                        <div class="tags-widget">
+                            <a href="#" class="tag" data-key="blog.tags.sustainable">Durable</a>
+                            <a href="#" class="tag" data-key="blog.tags.innovation">Innovation</a>
+                            <a href="#" class="tag" data-key="blog.tags.eco">Écologie</a>
+                            <a href="#" class="tag" data-key="blog.tags.materials">Matériaux</a>
+                            <a href="#" class="tag" data-key="blog.tags.technology">Technologie</a>
+                            <a href="#" class="tag" data-key="blog.tags.management">Gestion</a>
+                            <a href="#" class="tag" data-key="blog.tags.efficiency">Efficacité</a>
+                            <a href="#" class="tag" data-key="blog.tags.planning">Planification</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-key="footer.company">Construction 360</h3>
+                    <p data-key="footer.description">Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.quickLinks">Liens Rapides</h3>
+                    <ul>
+                        <li><a href="index.html" data-key="nav.home">Accueil</a></li>
+                        <li><a href="about.html" data-key="nav.about">À Propos</a></li>
+                        <li><a href="service.html" data-key="nav.services">Services</a></li>
+                        <li><a href="gallery.html" data-key="nav.projects">Projets</a></li>
+                        <li><a href="blog.html" data-key="nav.blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.services">Services</h3>
+                    <ul>
+                        <li><a href="service.html" data-key="services.conception.title">Conception</a></li>
+                        <li><a href="service.html" data-key="services.design.title">Design</a></li>
+                        <li><a href="service.html" data-key="services.execution.title">Exécution</a></li>
+                        <li><a href="service.html" data-key="footer.consultation">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-key="footer.contact">Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-key="footer.copyright">&copy; 2025 Construction 360. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language data
+        const translations = {
+            fr: {
+                // Navigation
+                "nav.home": "Accueil",
+                "nav.about": "À Propos",
+                "nav.services": "Services",
+                "nav.projects": "Projets",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Blog Hero Section
+                "blog.heroTitle": "Blog Construction 360",
+                "blog.heroSubtitle": "Découvrez les dernières actualités, innovations et conseils dans le domaine de la construction.",
+                
+                // Blog Section
+                "blog.title": "Actualités & Conseils",
+                "blog.subtitle": "Restez informé des dernières tendances et innovations dans l'industrie de la construction.",
+                
+                // Blog Post 1
+                "blog.post1.date": "15 Mars 2025",
+                "blog.post1.author": "Jean Martin",
+                "blog.post1.category": "Innovation",
+                "blog.post1.title": "Les Avantages de la Construction Durable en 2025",
+                "blog.post1.excerpt": "Découvrez comment les nouvelles technologies et matériaux écologiques transforment l'industrie de la construction, réduisant l'impact environnemental tout en améliorant l'efficacité énergétique.",
+                
+                // Blog Post 2
+                "blog.post2.date": "28 Février 2025",
+                "blog.post2.author": "Marie Lambert",
+                "blog.post2.category": "Matériaux",
+                "blog.post2.title": "Les Nouveaux Matériaux de Construction Révolutionnaires",
+                "blog.post2.excerpt": "Explorez les matériaux innovants qui changent la façon dont nous construisons, des bétons auto-cicatrisants aux composites légers et résistants pour des structures plus durables.",
+                
+                // Blog Post 3
+                "blog.post3.date": "10 Février 2025",
+                "blog.post3.author": "Pierre Dubois",
+                "blog.post3.category": "Gestion",
+                "blog.post3.title": "Optimiser la Gestion de Projet en Construction",
+                "blog.post3.excerpt": "Découvrez les meilleures pratiques et outils modernes pour une gestion de projet efficace, réduisant les délais et les coûts tout en maintenant une qualité exceptionnelle.",
+                
+                // Blog Tags
+                "blog.tags.sustainable": "Durable",
+                "blog.tags.innovation": "Innovation",
+                "blog.tags.eco": "Écologie",
+                "blog.tags.materials": "Matériaux",
+                "blog.tags.technology": "Technologie",
+                "blog.tags.future": "Futur",
+                "blog.tags.management": "Gestion",
+                "blog.tags.efficiency": "Efficacité",
+                "blog.tags.planning": "Planification",
+                
+                // Blog Actions
+                "blog.readMore": "Lire l'article",
+                
+                // Sidebar
+                "blog.search": "Recherche",
+                "blog.searchPlaceholder": "Rechercher...",
+                "blog.categories": "Catégories",
+                "blog.category.innovation": "Innovation",
+                "blog.category.materials": "Matériaux",
+                "blog.category.management": "Gestion",
+                "blog.category.techniques": "Techniques",
+                "blog.category.regulations": "Réglementations",
+                "blog.recentPosts": "Articles Récents",
+                "blog.tagsTitle": "Tags",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.",
+                "footer.quickLinks": "Liens Rapides",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Avenue de la Construction, Paris",
+                "footer.copyright": "© 2025 Construction 360. Tous droits réservés."
+            },
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.projects": "Projects",
+                "nav.blog": "Blog",
+                "nav.contact": "Contact",
+                
+                // Blog Hero Section
+                "blog.heroTitle": "Construction 360 Blog",
+                "blog.heroSubtitle": "Discover the latest news, innovations and tips in the construction field.",
+                
+                // Blog Section
+                "blog.title": "News & Tips",
+                "blog.subtitle": "Stay informed about the latest trends and innovations in the construction industry.",
+                
+                // Blog Post 1
+                "blog.post1.date": "March 15, 2025",
+                "blog.post1.author": "Jean Martin",
+                "blog.post1.category": "Innovation",
+                "blog.post1.title": "The Benefits of Sustainable Construction in 2025",
+                "blog.post1.excerpt": "Discover how new technologies and eco-friendly materials are transforming the construction industry, reducing environmental impact while improving energy efficiency.",
+                
+                // Blog Post 2
+                "blog.post2.date": "February 28, 2025",
+                "blog.post2.author": "Marie Lambert",
+                "blog.post2.category": "Materials",
+                "blog.post2.title": "Revolutionary New Construction Materials",
+                "blog.post2.excerpt": "Explore innovative materials that are changing the way we build, from self-healing concrete to lightweight and resistant composites for more durable structures.",
+                
+                // Blog Post 3
+                "blog.post3.date": "February 10, 2025",
+                "blog.post3.author": "Pierre Dubois",
+                "blog.post3.category": "Management",
+                "blog.post3.title": "Optimizing Project Management in Construction",
+                "blog.post3.excerpt": "Discover best practices and modern tools for effective project management, reducing timelines and costs while maintaining exceptional quality.",
+                
+                // Blog Tags
+                "blog.tags.sustainable": "Sustainable",
+                "blog.tags.innovation": "Innovation",
+                "blog.tags.eco": "Eco",
+                "blog.tags.materials": "Materials",
+                "blog.tags.technology": "Technology",
+                "blog.tags.future": "Future",
+                "blog.tags.management": "Management",
+                "blog.tags.efficiency": "Efficiency",
+                "blog.tags.planning": "Planning",
+                
+                // Blog Actions
+                "blog.readMore": "Read Article",
+                
+                // Sidebar
+                "blog.search": "Search",
+                "blog.searchPlaceholder": "Search...",
+                "blog.categories": "Categories",
+                "blog.category.innovation": "Innovation",
+                "blog.category.materials": "Materials",
+                "blog.category.management": "Management",
+                "blog.category.techniques": "Techniques",
+                "blog.category.regulations": "Regulations",
+                "blog.recentPosts": "Recent Posts",
+                "blog.tagsTitle": "Tags",
+                
+                // Footer
+                "footer.company": "Construction 360",
+                "footer.description": "Your trusted partner for all your construction projects, from conception to execution.",
+                "footer.quickLinks": "Quick Links",
+                "footer.services": "Services",
+                "footer.consultation": "Consultation",
+                "footer.contact": "Contact",
+                "footer.address": "123 Construction Avenue, Paris",
+                "footer.copyright": "© 2025 Construction 360. All rights reserved."
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'fr';
+
+        // Function to update all text content
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else if (element.tagName === 'OPTION') {
+                        // Skip options as they are handled separately
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update language selector
+            document.getElementById('language').value = lang;
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+        
+        // Language Selector
+        const languageSelector = document.getElementById('language');
+        languageSelector.addEventListener('change', function() {
+            updateLanguage(this.value);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Search form submission
+        const searchForm = document.querySelector('.search-form');
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchInput = this.querySelector('.search-input');
+            if (searchInput.value.trim() !== '') {
+                alert(currentLanguage === 'fr' 
+                    ? `Recherche pour: ${searchInput.value}` 
+                    : `Search for: ${searchInput.value}`);
+                searchInput.value = '';
+            }
+        });
+
+        // Initialize with French language
+        updateLanguage('fr');
+    </script>
+</body>
+</html>
