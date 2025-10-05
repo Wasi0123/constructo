@@ -563,6 +563,31 @@
             color: var(--white);
         }
 
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: var(--white);
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
         /* Footer */
         footer {
             background-color: var(--primary-grey);
@@ -672,6 +697,14 @@
             .logo-text {
                 font-size: 1.5rem;
             }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -715,12 +748,12 @@
             </a>
             <nav>
                 <ul>
-                    <li><a href="index.html" data-key="nav.home">Accueil</a></li>
-                    <li><a href="about.html" data-key="nav.about">À Propos</a></li>
-                    <li><a href="service.html" data-key="nav.services">Services</a></li>
-                    <li><a href="gallery.html" data-key="nav.projects">Projets</a></li>
-                    <li><a href="blog.html" class="active" data-key="nav.blog">Blog</a></li>
-                    <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+                    <li><a href="./index.html" data-key="nav.home">Accueil</a></li>
+                    <li><a href="./about.html" data-key="nav.about">À Propos</a></li>
+                    <li><a href="./service.html" data-key="nav.services">Services</a></li>
+                    <li><a href="./gallery.html" data-key="nav.projects">Projets</a></li>
+                    <li><a href="./blog.html" class="active" data-key="nav.blog">Blog</a></li>
+                    <li><a href="./contact.html" data-key="nav.contact">Contact</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -737,12 +770,12 @@
         </div>
         <div class="mobile-nav" id="mobileNav">
             <ul>
-                <li><a href="index.html" data-key="nav.home">Accueil</a></li>
-                <li><a href="about.html" data-key="nav.about">À Propos</a></li>
-                <li><a href="service.html" data-key="nav.services">Services</a></li>
-                <li><a href="gallery.html" data-key="nav.projects">Projets</a></li>
-                <li><a href="blog.html" class="active" data-key="nav.blog">Blog</a></li>
-                <li><a href="contact.html" data-key="nav.contact">Contact</a></li>
+                <li><a href="./index.html" data-key="nav.home">Accueil</a></li>
+                <li><a href="./about.html" data-key="nav.about">À Propos</a></li>
+                <li><a href="./service.html" data-key="nav.services">Services</a></li>
+                <li><a href="./gallery.html" data-key="nav.projects">Projets</a></li>
+                <li><a href="./blog.html" class="active" data-key="nav.blog">Blog</a></li>
+                <li><a href="./contact.html" data-key="nav.contact">Contact</a></li>
             </ul>
         </div>
     </header>
@@ -971,11 +1004,17 @@
                 </div>
             </div>
             <div class="copyright">
-                <p data-key="footer.copyright">&copy; 2025 Constructo60. Tous droits réservés.</p>
+                <p data-key="footer.copyright">&copy; 2025 Constructo360. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/15145153779?text=Bonjour%20Construction%20360%2C%20je%20suis%20intéressé%20par%20vos%20services%20de%20construction." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    
     <script>
         // Language data
         const translations = {

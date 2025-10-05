@@ -398,6 +398,31 @@
             box-shadow: var(--shadow);
         }
 
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: var(--white);
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
         /* Footer */
         footer {
             background-color: var(--primary-grey);
@@ -507,6 +532,14 @@
             .logo-text {
                 font-size: 1.5rem;
             }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -580,7 +613,7 @@
     <!-- Contact Hero Section -->
     <section class="contact-hero">
         <div class="container contact-hero-content">
-            <h1 data-key="contact.heroTitle">Contactez Construction 360</h1>
+            <h1 data-key="contact.heroTitle">Contactez Constructo360</h1>
             <p data-key="contact.heroSubtitle">Discutons de votre projet de construction. Notre équipe est à votre écoute pour répondre à toutes vos questions.</p>
         </div>
     </section>
@@ -601,7 +634,7 @@
                         </div>
                         <div class="contact-details">
                             <h3 data-key="contact.addressTitle">Adresse</h3>
-                            <p data-key="contact.address">123 Avenue de la Construction, 75000 Paris, France</p>
+                            <p data-key="contact.address">Montreal,Canada</p>
                         </div>
                     </div>
                     
@@ -611,7 +644,7 @@
                         </div>
                         <div class="contact-details">
                             <h3 data-key="contact.phoneTitle">Téléphone</h3>
-                            <p>+33 1 23 45 67 89</p>
+                            <p> +514-515-3779</p>
                         </div>
                     </div>
                     
@@ -710,17 +743,22 @@
                 <div class="footer-column">
                     <h3 data-key="footer.contact">Contact</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
-                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">Montreal,Canada</span></li>
+                        <li><i class="fas fa-phone"></i> +514-515-3779</li>
                         <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p data-key="footer.copyright">&copy; 2025 Construction 360. Tous droits réservés.</p>
+                <p data-key="footer.copyright">&copy; 2025 Constructo360. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/15145153779?text=Bonjour%20Construction%20360%2C%20je%20suis%20intéressé%20par%20vos%20services%20de%20construction." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
         // Language data
@@ -742,7 +780,7 @@
                 "contact.title": "Prenez Contact",
                 "contact.subtitle": "N'hésitez pas à nous contacter pour toute demande d'information ou de devis. Nous vous répondrons dans les plus brefs délais.",
                 "contact.addressTitle": "Adresse",
-                "contact.address": "123 Avenue de la Construction, 75000 Paris, France",
+                "contact.address": "Montreal, Canada",
                 "contact.phoneTitle": "Téléphone",
                 "contact.emailTitle": "Email",
                 "contact.hoursTitle": "Heures d'ouverture",
@@ -757,14 +795,14 @@
                 "contact.form.submit": "Envoyer le message",
                 
                 // Footer
-                "footer.company": "Construction 360",
+                "footer.company": "Constructo360",
                 "footer.description": "Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.",
                 "footer.quickLinks": "Liens Rapides",
                 "footer.services": "Services",
                 "footer.consultation": "Consultation",
                 "footer.contact": "Contact",
-                "footer.address": "123 Avenue de la Construction, Paris",
-                "footer.copyright": "© 2025 Construction 360. Tous droits réservés."
+                "footer.address": "Montreal, Canada",
+                "footer.copyright": "© 2025 Constructo360. Tous droits réservés."
             },
             en: {
                 // Navigation
@@ -776,14 +814,14 @@
                 "nav.contact": "Contact",
                 
                 // Contact Hero Section
-                "contact.heroTitle": "Contact Construction 360",
+                "contact.heroTitle": "Contact Constructo360",
                 "contact.heroSubtitle": "Let's discuss your construction project. Our team is available to answer all your questions.",
                 
                 // Contact Section
                 "contact.title": "Get In Touch",
                 "contact.subtitle": "Feel free to contact us for any information request or quote. We will respond as soon as possible.",
                 "contact.addressTitle": "Address",
-                "contact.address": "123 Construction Avenue, 75000 Paris, France",
+                "contact.address": "Montreal ,Canada",
                 "contact.phoneTitle": "Phone",
                 "contact.emailTitle": "Email",
                 "contact.hoursTitle": "Opening Hours",
@@ -798,14 +836,14 @@
                 "contact.form.submit": "Send Message",
                 
                 // Footer
-                "footer.company": "Construction 360",
+                "footer.company": "Constructo360",
                 "footer.description": "Your trusted partner for all your construction projects, from conception to execution.",
                 "footer.quickLinks": "Quick Links",
                 "footer.services": "Services",
                 "footer.consultation": "Consultation",
                 "footer.contact": "Contact",
-                "footer.address": "123 Construction Avenue, Paris",
-                "footer.copyright": "© 2025 Construction 360. All rights reserved."
+                "footer.address": " Montreal,Canada",
+                "footer.copyright": "© 2025 Constructo360. All rights reserved."
             }
         };
 
