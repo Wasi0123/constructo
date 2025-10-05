@@ -640,6 +640,31 @@
             color: #aaa;
         }
 
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: var(--white);
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
         /* Responsive Styles */
         @media (max-width: 992px) {
             .service-detail {
@@ -682,6 +707,14 @@
             
             .service-info h3 {
                 font-size: 1.7rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
             }
         }
         
@@ -948,7 +981,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3 data-key="footer.company">Construction 360</h3>
+                    <h3 data-key="footer.company">Constructo360</h3>
                     <p data-key="footer.description">Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -979,8 +1012,8 @@
                 <div class="footer-column">
                     <h3 data-key="footer.contact">Contact</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
-                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">Montreal</span></li>
+                        <li><i class="fas fa-phone"></i> +514-515-3779</li>
                         <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
                     </ul>
                 </div>
@@ -990,6 +1023,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/15145153779?text=Bonjour%20Construction%20360%2C%20je%20suis%20intéressé%20par%20vos%20services%20de%20construction." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
         // Language data
@@ -1010,7 +1048,7 @@
                 // Services Page
                 "services.title": "Nos Services",
                 "services.overview.title": "Une Approche Complète de la Construction",
-                "services.overview.description": "Chez Construction 360, nous offrons une gamme complète de services de construction, de la conception initiale à la livraison finale. Notre approche intégrée garantit une cohérence et une excellence à chaque étape de votre projet.",
+                "services.overview.description": "Chez Constructo360, nous offrons une gamme complète de services de construction, de la conception initiale à la livraison finale. Notre approche intégrée garantit une cohérence et une excellence à chaque étape de votre projet.",
                 
                 // Main Services
                 "services.main.title": "Nos Services Principaux",
@@ -1078,13 +1116,13 @@
                 "services.cta.button": "Contactez-nous",
                 
                 // Footer
-                "footer.company": "Construction 360",
+                "footer.company": "Constructo360",
                 "footer.description": "Votre partenaire de confiance pour tous vos projets de construction, de la conception à l'exécution.",
                 "footer.quickLinks": "Liens Rapides",
                 "footer.services": "Services",
                 "footer.consultation": "Consultation",
                 "footer.contact": "Contact",
-                "footer.address": "123 Avenue de la Construction, Paris",
+                "footer.address": "Montreal",
                 "footer.copyright": "© 2025 Constructo360. Tous droits réservés."
             },
             en: {
@@ -1103,7 +1141,7 @@
                 // Services Page
                 "services.title": "Our Services",
                 "services.overview.title": "A Comprehensive Construction Approach",
-                "services.overview.description": "At Construction 360, we offer a complete range of construction services, from initial design to final delivery. Our integrated approach ensures consistency and excellence at every stage of your project.",
+                "services.overview.description": "At Constructo360, we offer a complete range of construction services, from initial design to final delivery. Our integrated approach ensures consistency and excellence at every stage of your project.",
                 
                 // Main Services
                 "services.main.title": "Our Main Services",
@@ -1171,13 +1209,13 @@
                 "services.cta.button": "Contact Us",
                 
                 // Footer
-                "footer.company": "Construction 360",
+                "footer.company": "Constructo360",
                 "footer.description": "Your trusted partner for all your construction projects, from conception to execution.",
                 "footer.quickLinks": "Quick Links",
                 "footer.services": "Services",
                 "footer.consultation": "Consultation",
                 "footer.contact": "Contact",
-                "footer.address": "123 Construction Avenue, Paris",
+                "footer.address":"Montreal",
                 "footer.copyright": "© 2025 Constructo360. All rights reserved."
             }
         };

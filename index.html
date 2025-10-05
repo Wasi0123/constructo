@@ -592,6 +592,31 @@
             color: #aaa;
         }
 
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: var(--white);
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
         /* Responsive Styles */
         @media (max-width: 992px) {
             .hero h1 {
@@ -645,6 +670,14 @@
             .logo-text {
                 font-size: 1.5rem;
             }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -669,6 +702,7 @@
                 height: 40px;
             }
         }
+        
     </style>
 </head>
 <body>
@@ -718,10 +752,17 @@
     <!-- Hero Section with Video Background -->
     <section class="hero">
         <div class="video-background">
-            <!-- YouTube Construction Video Background -->
-
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0Vm0QjMmIdE?si=pcvuMEnpXeGbTUGb&amp;controls=0&amp;start=6&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=0Vm0QjMmIdE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <!-- YouTube Construction Video Background with Autoplay -->
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/IjlYXtI2-GU?si=p9VQFsNNrTklYoSc&autoplay=1&mute=1&loop=1&playlist=IjlYXtI2-GU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
         </div>
         <div class="video-overlay"></div>
         <div class="container hero-content">
@@ -744,7 +785,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-lightbulb"></i>
+                        <i class="fas fa-drafting-compass"></i>
                     </div>
                     <div class="service-content">
                         <h3 data-key="services.conception.title">Conception</h3>
@@ -790,7 +831,7 @@
                         <div class="slide-content">
                             <h3 data-key="projects.project1.title">Résidence Moderne</h3>
                             <p data-key="projects.project1.description">Construction d'une résidence contemporaine avec des matériaux durables et des finitions de haute qualité.</p>
-                            <a href="#" class="btn" data-key="projects.viewProject">Voir le projet</a>
+                            <a href="./service.html" class="btn" data-key="projects.viewProject">Voir le projet</a>
                         </div>
                     </div>
                     <div class="slide">
@@ -798,7 +839,7 @@
                         <div class="slide-content">
                             <h3 data-key="projects.project2.title">Centre Commercial</h3>
                             <p data-key="projects.project2.description">Conception et construction d'un centre commercial innovant avec des espaces commerciaux et de détente.</p>
-                            <a href="#" class="btn" data-key="projects.viewProject">Voir le projet</a>
+                            <a href="./service.html" class="btn" data-key="projects.viewProject">Voir le projet</a>
                         </div>
                     </div>
                     <div class="slide">
@@ -806,7 +847,7 @@
                         <div class="slide-content">
                             <h3 data-key="projects.project3.title">Complexe Industriel</h3>
                             <p data-key="projects.project3.description">Réalisation d'un complexe industriel avec des installations modernes et respectueuses de l'environnement.</p>
-                            <a href="#" class="btn" data-key="projects.viewProject">Voir le projet</a>
+                            <a href="./service.html" class="btn" data-key="projects.viewProject">Voir le projet</a>
                         </div>
                     </div>
                 </div>
@@ -918,7 +959,7 @@
                     <h3 data-key="footer.contact">Contact</h3>
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> <span data-key="footer.address">123 Avenue de la Construction, Paris</span></li>
-                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-phone"></i> +514-515-3779</li>
                         <li><i class="fas fa-envelope"></i> info@construction360.fr</li>
                     </ul>
                 </div>
@@ -928,6 +969,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/15145153779?text=Bonjour%20Construction%20360%2C%20je%20suis%20intéressé%20par%20vos%20services%20de%20construction." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
         // Language data
@@ -998,7 +1044,7 @@
                 "footer.consultation": "Consultation",
                 "footer.contact": "Contact",
                 "footer.address": "123 Avenue de la Construction, Paris",
-                "footer.copyright": "© 2023 Construction 360. Tous droits réservés."
+                "footer.copyright": "© 2025 Constructo360. Tous droits réservés."
             },
             en: {
                 // Navigation
@@ -1065,8 +1111,8 @@
                 "footer.services": "Services",
                 "footer.consultation": "Consultation",
                 "footer.contact": "Contact",
-                "footer.address": "123 Construction Avenue, Paris",
-                "footer.copyright": "© 2023 Construction 360. All rights reserved."
+                "footer.address": "Montreal",
+                "footer.copyright": "© 2025 Constructo360. All rights reserved."
             }
         };
 
